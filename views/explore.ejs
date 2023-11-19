@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/explore.css" />
+  </head>
+  <body>
+    <div id="main">
+      <%- include('./partials/header'); %>
+      <div id="right">
+        <div class="container">
+          <% post.reverse().forEach(post => { %>
+          <a href="/comment/<%=post._id%>">
+            <div class="cnt">
+                <% if(post.filetype.split("/")[0]=="image"){ %>
+                <img src="/post/<%=post.post%>" alt="" />
+                <%}else{%>
+                <video id="${post._id}" class="dbllike reel" controls>
+                  <source src="/post/<%=post.post%>" type="video/mp4" />
+                </video>
+                <%}%>
+              </div>
+          </a>
+          <% }); %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
