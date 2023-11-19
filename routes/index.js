@@ -364,7 +364,7 @@ const user = await userModel
     username: req.session.passport.user,
   })
   .populate("bookmarks");
-  console.log(user.bookmarks);
+  
 res.render("saved", { user, posts: user.bookmarks, founduser });
 })
 
