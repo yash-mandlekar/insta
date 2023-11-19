@@ -75,8 +75,9 @@ router.get("/feed", isLoggedIn, async function (req, res, next) {
     username: req.session.passport.user,
   });
   const post = await postModel.find().populate("user");
-  console.log(post);
-  res.render("feed", { user, post });
+  const stories = await storyModel.find().populate("author");
+  console.log(stories);
+  res.render("feed", { user, post, stories });
 });
 
 router.get("/reels", isLoggedIn, async function (req, res, next) {
@@ -90,9 +91,9 @@ router.get("/bookmark/:postid", isLoggedIn, async function (req, res, next) {
   const user = await userModel.findOne({
     username: req.session.passport.user,
   });
-  if(user.bookmarks.includes(req.params.postid)){
-    user.bookmarks.splice(user.bookmarks.indexOf(req.params.postid),1);
-  }else{
+  if (user.bookmarks.includes(req.params.postid)) {
+    user.bookmarks.splice(user.bookmarks.indexOf(req.params.postid), 1);
+  } else {
     user.bookmarks.push(req.params.postid);
   }
   user.save();
@@ -117,7 +118,7 @@ router.post(
     successRedirect: "feed",
     failureRedirect: "/",
   }),
-  function (req, res, next) {}
+  function (req, res, next) { }
 );
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
@@ -165,15 +166,18 @@ router.post(
     const user = await userModel.findOne({
       username: req.session.passport.user,
     });
-    // console.log(req.file.buffer);
+
     const randomname = crypto.randomBytes(20).toString("hex");
     const postData = id3.read(req.file.buffer);
-    await Readable.from(req.file.buffer).pipe(
-      gfsbucket.openUploadStream(randomname + "post")
-    );
-    await Readable.from(req.file.buffer).pipe(
-      gfsbucketvideo.openUploadStream(randomname + "video")
-    );
+    if (req.file.mimetype.split("/")[0] == "image") {
+      await Readable.from(req.file.buffer).pipe(
+        gfsbucket.openUploadStream(randomname + "post")
+      );
+    } else {
+      await Readable.from(req.file.buffer).pipe(
+        gfsbucketvideo.openUploadStream(randomname + "video")
+      );
+    }
 
     const post = await postModel.create({
       post: randomname + "post",
@@ -190,9 +194,48 @@ router.post(
 );
 
 // story----
-router.post('/story',(req,res,next) => {
-  res.render('story')
-})
+router.post('/story', isLoggedIn,
+  upload.single("story"),
+  async (req, res, next) => {
+    const user = await userModel.findOne({
+      username: req.session.passport.user,
+    });
+
+    const randomname = crypto.randomBytes(20).toString("hex");
+    const postData = id3.read(req.file.buffer);
+    if (req.file.mimetype.split("/")[0] == "image") {
+      await Readable.from(req.file.buffer).pipe(
+        gfsbucket.openUploadStream(randomname + "story")
+      );
+    } else {
+      await Readable.from(req.file.buffer).pipe(
+        gfsbucketvideo.openUploadStream(randomname + "video")
+      );
+    }
+
+    const story = await storyModel.create({
+      file: randomname + "story",
+      author: user._id,
+    });
+    user.story.push(story._id);
+    await user.save();
+    setTimeout(() => {
+      res.redirect("/feed");
+    }, 500);
+  }
+)
+// Single Story
+// commment
+router.get("/story/:id", isLoggedIn, async (req, res, next) => {
+  const user = await userModel.findOne({
+    username: req.session.passport.user,
+  });
+  const story = await storyModel
+    .findOne({
+      _id: req.params.id,
+    })
+  res.render("story", { user, story });
+});
 
 // dp change code
 router.post(
@@ -353,19 +396,19 @@ router.get("/feeds/:page/:qantity", isLoggedIn, async (req, res, next) => {
   res.json({ posts: posts, user: user });
 });
 // ------------saved------------
-router.get("/saved/:username",isLoggedIn,async(req,res,next)=>{
+router.get("/saved/:username", isLoggedIn, async (req, res, next) => {
   const founduser = await userModel
-  .findOne({
-    username: req.params.username,
-  })
-  .populate("posts");
-const user = await userModel
-  .findOne({
-    username: req.session.passport.user,
-  })
-  .populate("bookmarks");
-  
-res.render("saved", { user, posts: user.bookmarks, founduser });
+    .findOne({
+      username: req.params.username,
+    })
+    .populate("posts");
+  const user = await userModel
+    .findOne({
+      username: req.session.passport.user,
+    })
+    .populate("bookmarks");
+
+  res.render("saved", { user, posts: user.bookmarks, founduser });
 })
 
 module.exports = router;
