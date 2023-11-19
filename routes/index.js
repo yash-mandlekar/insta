@@ -169,22 +169,25 @@ router.post(
 
     const randomname = crypto.randomBytes(20).toString("hex");
     const postData = id3.read(req.file.buffer);
-    if (req.file.mimetype.split("/")[0] == "image") {
+    
       await Readable.from(req.file.buffer).pipe(
         gfsbucket.openUploadStream(randomname + "post")
       );
-    } else {
+  
       await Readable.from(req.file.buffer).pipe(
         gfsbucketvideo.openUploadStream(randomname + "video")
       );
-    }
-
-    const post = await postModel.create({
+    
+    
+      const post = await postModel.create({
       post: randomname + "post",
       filetype: req.file.mimetype,
       user: req.user._id,
       caption: req.body.caption,
-    });
+    
+      });
+    
+     
     user.posts.push(post._id);
     await user.save();
     setTimeout(() => {

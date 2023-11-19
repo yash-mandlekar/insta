@@ -94,7 +94,7 @@
             </div>
           </div>
           <div class="storycontent">
-            <% stories.forEach((story)=>{ %>
+            <% stories.reverse().forEach((story)=>{ %>
 
               <a href="/story/<%=story._id%>" class="storycover">
                 <div class="storybox">
@@ -103,7 +103,7 @@
                   </div>
                   <div class="text">
                     <h6>
-                      <%=user.username.slice(0,7)%>...
+                      <%=story.author.username.slice(0,7)%>...
                     </h6>
                   </div>
                 </div>
