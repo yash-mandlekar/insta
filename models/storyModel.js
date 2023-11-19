@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 const StorySchema = new mongoose.Schema({
-  author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  author: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
   file: { type: String, required: true },
   caption: { type: String },
   date: { type: Date, default: Date.now },
-  views: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  views: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
   expires: { type: Date, default: Date.now() + 24 * 60 * 60 * 1000 },
 });
 
