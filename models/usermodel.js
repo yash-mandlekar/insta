@@ -12,6 +12,7 @@ const userSchema = mongoose.Schema({
   bookmarks: [{ type: mongoose.Schema.Types.ObjectId, ref: "post" }],
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
   followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
+  story: [{ type: mongoose.Schema.Types.ObjectId, ref: "story" }],
 });
 userSchema.plugin(plm);
 module.exports = mongoose.model("user", userSchema);
