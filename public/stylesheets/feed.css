@@ -25,6 +25,7 @@ a{
     padding-left: 12%;
     height: 100%;
     overflow-y: auto;
+
     position: relative;
     padding-top: 10px;
     background-color: #ffffff;
@@ -142,6 +143,7 @@ a{
     height: 13%;
     display: flex;
     align-items: center;
+    scale: 1.1;
 
 }
 .storycontent{
@@ -438,68 +440,6 @@ button {
 }
 
 /* ----------------------more option------------------------------ */
-#moreopt{
-    width: 16vmax;
-    height: 25vmax;
-    display: none; 
-    box-shadow: -2px 0px 14px 3px rgba(147,135,135,0.75);
-    border-radius: 13px;
-    position: absolute;
-    bottom: 7%;
-    left: .6%;
-    z-index: 2;
-  overflow: hidden;
-
-}
-#moreopt h5{
-    color: #828282;
-}
-.upr{
-    width: 100%;
-    /* padding: 10px; */
-    padding-right: 10px;
-    height: 65%;
-    background-color: #ffffff;
-}
-.neeche{
-    width: 100%;
-    height: 32%;
-    padding-right: 10px;
-
-    background-color:#ffffff;
-}
-.sentii{
-    width: 100%;
-    border-radius: 6px;
-    border: none;
-    height: 2.9vmax;
-    padding: 0 17px;
-    display: flex;
-    background-color: transparent;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-}
-.sentii:hover{
-    background-color: #dbdbdb;
-
-}
-.sentiii{
-    width: 100%;
-    border-radius: 6px;
-    border: none;
-    height: 3.3vmax;
-    padding: 0 20px;
-    display: flex;
-    background-color: transparent;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-}
-.sentiii:hover{
-    background-color: #dbdbdb;
-
-}
 /* --------------------more option end--------------------------- */
 
 .reel{
@@ -524,28 +464,7 @@ button {
 .like{
     cursor: pointer;
 }
-@media  screen and (max-width: 1219px){
-    #right{
-        width: 95%;
-        padding-left: 16%;
-        height: 100%;
-        overflow-y: auto;
-        position: relative;
-        padding-top: 10px;
-        background-color: #ffffff;
-    
-    }
-    .postcontent{
-        width: 50%;
-        height: 90%;
-        border-bottom: 1px solid #dbdbdb;
-        border-width: thin;
-        margin-left: 4.8vmax;
-        margin-top: 10px;
-        
-    }
-    
-}
+
 /* -----------pop-------------- */
 #pop2{
     width: 100%;
@@ -632,3 +551,136 @@ border-radius: 12px;
 #saved svg{
     margin-left: 1vmax;
 }
+/* suggest ----------start------------ */
+.suggest{
+    width: 25vmax;
+    height: 28vmax;
+    position: absolute;
+    right: 8%;
+    top: 4%;
+}
+.one{
+    width: 100%;
+    height: 2vmax;
+    padding: 6px;
+    color:#acacac;
+    font-weight: 600;
+}
+/* suggest ----------end------------ */
+
+
+
+
+
+
+
+
+
+
+
+@media  screen and (max-width: 1219px){
+    #right{
+        width: 95%;
+        padding-left: 16%;
+        height: 100%;
+        overflow-y: auto;
+        position: relative;
+        padding-top: 10px;
+        background-color: #ffffff;
+    
+    }
+    .postcontent{
+        width: 50%;
+        height: 90%;
+        border-bottom: 1px solid #dbdbdb;
+        border-width: thin;
+        margin-left: 4.8vmax;
+        margin-top: 10px;
+        
+    }
+    
+
+    /* storyyyy -----------------------------*/
+    .staary{
+        width:61%;
+        height: 13%;
+        display: flex;
+        align-items: center;
+        scale: 1.5;
+    
+    }
+    .storycontent{
+        width: 80%;
+        height: 100%;
+        margin-top: 1vmax;
+        padding-top: .6vmax;
+        /* margin-bottom:2vmax; */
+        /* background-color: pink; */
+        position: relative;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    .storycover{
+        width: 100%;
+        height: 100%;
+        padding-top: .6vmax;
+        /* background-color: rebeccapurple; */
+    /*     position: absolute; */
+        overflow-x: auto;
+        overflow-y: hidden;
+        display: inline-block;
+        left: 0;
+        top: 0;
+    }
+    .storycover::-webkit-scrollbar{
+        display: none;
+    }
+    .storybox{
+        width: 5.5vmax;
+        /* background-color:red; */
+        position: relative;
+        height: fit-content;
+        overflow: hidden;
+        display: inline-block;
+        cursor: pointer;
+        /* background-color: red; */
+    
+    }
+    .storybox .text h6{
+        text-align: center;
+        font-weight: 400;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .storycover{
+        width: fit-content;
+        height: fit-content;
+    }
+    
+    .storydp{
+        width: 4vmax;
+        height: 4vmax;
+        background-color: black;
+        border-radius: 50%;
+        margin-left: 15px;
+        overflow: hidden;
+        padding: 2px;
+        position: relative;
+        background: linear-gradient(#df0ab2, #de13b2, #ff2b64,#ff8507,#ffc006);
+    }
+    .storydp img{
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    #add{
+    position: absolute;
+    right: 0%;
+    bottom: 15%;
+    z-index: 999;
+    color: #0095f6;
+    }
+    /* storyyy=------------------------------------------ */
+}  
+

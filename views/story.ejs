@@ -30,6 +30,12 @@
         <div class="progress">
           <div class="growth"></div>
         </div>
+        <div class="userprofile">
+          <div class="circ">
+            <img src="../images/uploads/<%=story.author.dp%>" alt="">
+          </div>
+          <h3>manish mandlekar</h3>
+        </div>
         <img src="/post/<%= story.file %>" />
       </div>
 
@@ -71,7 +77,7 @@
       if(growth<100){
         setInterval(() => {
           document.querySelector('.growth').style.width = `${growth++}%`
-        }, 25);
+        }, 50);
       }else{
         growth = 0;
       }

@@ -413,5 +413,9 @@ router.get("/saved/:username", isLoggedIn, async (req, res, next) => {
 
   res.render("saved", { user, posts: user.bookmarks, founduser });
 })
-
+// messages----------
+router.get('/message',isLoggedIn, async(req, res, next) => {
+  const user = await userModel.findOne({ username:req.session.passport.user})
+  res.render('message',{user})
+})
 module.exports = router;

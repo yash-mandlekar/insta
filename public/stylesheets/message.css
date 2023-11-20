@@ -1,0 +1,194 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+html,body{
+    height: 100%;
+    width: 100%;
+}
+#main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.left-2 {
+  
+    width: 5%;
+    padding: 2.2vmax 1vmax;
+      border-right: 1px solid #dbdbdb;
+border-width: thin;
+height: 100%;
+    /* background-color: red; */
+    
+    
+  }
+  .left-2 button {
+    width: 100%;
+    height: 2vmax;
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* align-items: center; */
+    margin-left: -0.3vmax;
+    border: none;
+  
+    cursor: pointer;
+    background-color: transparent;
+  }
+  .left-2 > svg {
+    margin-bottom: 2vmax;
+    margin-left: 10px;
+    
+  }
+  
+  .left-2 button .circ {
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+  .left-2 .solo{
+      margin-bottom: 12vmax;
+  }
+  
+  #moreopt{
+    width: 16vmax;
+    height: 25vmax;
+    display: none; 
+    box-shadow: -2px 0px 14px 3px rgba(147,135,135,0.75);
+    border-radius: 13px;
+    position: absolute;
+    bottom: 13%;
+    left: .6%;
+    z-index: 2;
+  overflow: hidden;
+  
+  }
+  #moreopt h5{
+    color: #828282;
+  }
+  .upr{
+    width: 100%;
+    /* padding: 10px; */
+    padding-right: 10px;
+    height: 65%;
+    background-color: #ffffff;
+  }
+  .neeche{
+    width: 100%;
+    height: 32%;
+    padding-right: 10px;
+  
+    background-color:#ffffff;
+  }
+  .sentii{
+    width: 100%;
+    border-radius: 6px;
+    border: none;
+    height: 2.9vmax;
+    padding: 0 17px;
+    display: flex;
+    background-color: transparent;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+  }
+  .sentii:hover{
+    background-color: #dbdbdb;
+  
+  }
+  .sentiii{
+    width: 100%;
+    border-radius: 6px;
+    border: none;
+    height: 3.3vmax;
+    padding: 0 20px;
+    display: flex;
+    background-color: transparent;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+  }
+  .sentiii:hover{
+    background-color: #dbdbdb;
+  
+  }
+  .circ img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .center{
+    width: 27%;
+    height: 100%;
+    border-right: 1px solid #dbdbdb;
+  }
+  .top{
+    width: 100%;
+    height: 15%;
+    padding-top: 1px;
+    border-bottom: 1px solid #dbdbdb;
+  }
+  .cnti{
+    width: 100%;
+    height: 30%;
+    margin-top: 2.5vmax;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:  0 13px;
+    
+  }
+  .primary{
+    width: 30%;
+    height: 30%;
+    margin-top: .8vmax;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:  0 13px;
+border-bottom: 1px solid black;
+    
+  }
+  .primary h4{
+    font-weight: 400;
+  }
+  .inbox{
+    width: 100%;
+    height: 85%;
+    overflow-y: auto;
+  }
+  .user{
+    width: 100%;
+    height: 4.5vmax;
+    display: flex;
+  }
+  .lo{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .profile{
+    width: 4vmax;
+    height: 4vmax;
+    border-radius: 50%;
+    background-color: red;
+    overflow: hidden;
+  }
+  .ro{
+    width: 80%;
+    height: 100%;
+    padding: 8px;
+  }
+  .ro h3{
+    font-weight: 500;
+  }
+  .user:hover{
+    background-color: rgba(226, 223, 223, 0.417);
+  }

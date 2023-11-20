@@ -102,16 +102,79 @@
 .left-2 .solo{
     margin-bottom: 18vmax;
 }
-@media  (max-width:1200px) {
-    #left{
-        width:0;
-      padding: 0;
-    }
-    .left-2{
-        width: 5%;
-        padding: 2.2vmax 1vmax;
-        border-right: 1px solid #dbdbdb;
-  border-width: thin;
-  height: 100%;
-    }
+
+#moreopt{
+  width: 16vmax;
+  height: 25vmax;
+  display: none; 
+  box-shadow: -2px 0px 14px 3px rgba(147,135,135,0.75);
+  border-radius: 13px;
+  position: absolute;
+  bottom: 13%;
+  left: .6%;
+  z-index: 2;
+overflow: hidden;
+
+}
+#moreopt h5{
+  color: #828282;
+}
+.upr{
+  width: 100%;
+  /* padding: 10px; */
+  padding-right: 10px;
+  height: 65%;
+  background-color: #ffffff;
+}
+.neeche{
+  width: 100%;
+  height: 32%;
+  padding-right: 10px;
+
+  background-color:#ffffff;
+}
+.sentii{
+  width: 100%;
+  border-radius: 6px;
+  border: none;
+  height: 2.9vmax;
+  padding: 0 17px;
+  display: flex;
+  background-color: transparent;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+.sentii:hover{
+  background-color: #dbdbdb;
+
+}
+.sentiii{
+  width: 100%;
+  border-radius: 6px;
+  border: none;
+  height: 3.3vmax;
+  padding: 0 20px;
+  display: flex;
+  background-color: transparent;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+.sentiii:hover{
+  background-color: #dbdbdb;
+
+}
+@media  (max-width:1219px) {
+  #left{
+      width:0;
+    padding: 0;
+  }
+  .left-2{
+      width: 5%;
+      padding: 2.2vmax 1vmax;
+      border-right: 1px solid #dbdbdb;
+border-width: thin;
+height: 100%;
+  }
 }
