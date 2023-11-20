@@ -46,6 +46,7 @@ html,body{
     left: 0;
     gap: 10px;
     display: flex;
+    padding: 6px;
     align-items: center;
     justify-content: flex-start;
 }

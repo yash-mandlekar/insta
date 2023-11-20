@@ -233,7 +233,8 @@ router.get("/story/:id", isLoggedIn, async (req, res, next) => {
   const story = await storyModel
     .findOne({
       _id: req.params.id,
-    })
+    }).populate('author')
+    console.log(story);
   res.render("story", { user, story });
 });
 
