@@ -19,10 +19,8 @@ const usermodel = require("../models/usermodel");
 mongoose
   .connect("mongodb://0.0.0.0/instagram")
   .then(() => {
-    console.log("connected to database");
   })
   .catch((err) => {
-    console.log(err);
   });
 
 var conn = mongoose.connection;
@@ -76,7 +74,6 @@ router.get("/feed", isLoggedIn, async function (req, res, next) {
   });
   const post = await postModel.find().populate("user");
   const stories = await storyModel.find().populate("author");
-  console.log(stories);
   res.render("feed", { user, post, stories });
 });
 
@@ -169,25 +166,25 @@ router.post(
 
     const randomname = crypto.randomBytes(20).toString("hex");
     const postData = id3.read(req.file.buffer);
-    
-      await Readable.from(req.file.buffer).pipe(
-        gfsbucket.openUploadStream(randomname + "post")
-      );
-  
-      await Readable.from(req.file.buffer).pipe(
-        gfsbucketvideo.openUploadStream(randomname + "video")
-      );
-    
-    
-      const post = await postModel.create({
+
+    await Readable.from(req.file.buffer).pipe(
+      gfsbucket.openUploadStream(randomname + "post")
+    );
+
+    await Readable.from(req.file.buffer).pipe(
+      gfsbucketvideo.openUploadStream(randomname + "video")
+    );
+
+
+    const post = await postModel.create({
       post: randomname + "post",
       filetype: req.file.mimetype,
       user: req.user._id,
       caption: req.body.caption,
-    
-      });
-    
-     
+
+    });
+
+
     user.posts.push(post._id);
     await user.save();
     setTimeout(() => {
@@ -254,7 +251,6 @@ router.post(
         if (founduser.dp !== "def.png") {
           fs.unlinkSync(`./public/images/uploads/${founduser.dp}`);
         }
-        console.log(req.file);
         founduser.dp = req.file.filename;
         founduser.save();
       })
@@ -387,15 +383,21 @@ router.get("/explore", isLoggedIn, async (req, res, next) => {
 router.get("/feeds/:page/:qantity", isLoggedIn, async (req, res, next) => {
   const page = req.params.page;
   const qantity = req.params.qantity;
-  const posts = await postModel.find().populate("user");
+
+  var user = await usermodel.findById(req.user._id)
+  const foundposts = await postModel.find().populate("user");
+  var posts = [];
+  foundposts.forEach(post => {
+    if (user.following.indexOf(post.user._id) !== -1 || user._id.toString() == post.user._id.toString()) {
+      posts.push(post);
+    }
+  });
   posts.sort(function (a, b) {
     return new Date(b.time) - new Date(a.time);
   });
   const skip = page * qantity;
   posts.splice(0, skip);
   posts.splice(qantity, posts.length);
-
-  var user = await usermodel.findById(req.user._id);
   res.json({ posts: posts, user: user });
 });
 // ------------saved------------
@@ -414,8 +416,8 @@ router.get("/saved/:username", isLoggedIn, async (req, res, next) => {
   res.render("saved", { user, posts: user.bookmarks, founduser });
 })
 // messages----------
-router.get('/message',isLoggedIn, async(req, res, next) => {
-  const user = await userModel.findOne({ username:req.session.passport.user})
-  res.render('message',{user})
+router.get('/message', isLoggedIn, async (req, res, next) => {
+  const user = await userModel.findOne({ username: req.session.passport.user })
+  res.render('message', { user })
 })
 module.exports = router;
