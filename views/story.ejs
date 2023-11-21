@@ -31,17 +31,21 @@
           <div class="growth"></div>
         </div>
         <div class="userprofile">
-          <div class="circ">
-            <img src="../images/uploads/<%=story.author.dp%>" alt="">
-          </div>
-          <h3><%=story.author.username%></h3>
-         <% if(story.author._id.toString() === user._id.toString()){%>
-          <a href="/dltstory/<%=story._id%>">
-            <div class="dltbtn">
-              <h5>Delete story</h5>
+          <div class="ronaldo">
+            <div class="circ">
+              <img src="../images/uploads/<%=story.author.dp%>" alt="">
             </div>
-          </a>
-        <% } %>
+            <h3><%=story.author.username%></h3>
+          </div>
+         <div class="messi">
+          <% if(story.author._id.toString() === user._id.toString()){%>
+            <a href="/dltstory/<%=story._id%>">
+              <div class="dltbtn">
+                <h5>Delete story</h5>
+              </div>
+            </a>
+            <% } %>
+         </div>
          
         </div>
         <img src="/post/<%= story.file %>" />

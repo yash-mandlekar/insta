@@ -44,11 +44,26 @@ html,body{
     position: absolute;
     top: 2%;
     left: 0;
-    gap: 10px;
+    
     display: flex;
-    padding: 6px;
+    
+}
+.ronaldo{
+    width: 50%;
+    height: 100%;
+    display: flex;
     align-items: center;
     justify-content: flex-start;
+    padding: 10px;
+    gap: 8px;
+}
+.messi{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px;
 }
 .circ{
     width: 2.2vmax;
@@ -86,7 +101,7 @@ svg{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 11vmax;
+    margin-left: 13vmax;
 }
 a{
     text-decoration: none;
