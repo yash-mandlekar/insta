@@ -52,7 +52,7 @@ const storage1 = multer.diskStorage({
     const uniqueSuffix =
       Date.now() +
       "-" +
-      Math.round(Math.random() * 1e9 + path.extname(file.originalname));
+      Math.round(Math.random() * 1e9) + path.extname(file.originalname);
     cb(null, file.fieldname + "-" + uniqueSuffix);
   },
 });
@@ -235,7 +235,7 @@ router.get("/story/:id", isLoggedIn, async (req, res, next) => {
     .findOne({
       _id: req.params.id,
     }).populate('author')
-    console.log(story);
+  console.log(story);
   res.render("story", { user, story });
 });
 
@@ -419,27 +419,27 @@ router.get("/saved/:username", isLoggedIn, async (req, res, next) => {
 })
 
 // dlt storyyyy
-router.get("/dltstory/:storyid",isLoggedIn, async (req, res,next)=>{
+router.get("/dltstory/:storyid", isLoggedIn, async (req, res, next) => {
   var user = await userModel.findOne({
-  username : req.session.passport.user
-})
- storyModel.findByIdAndDelete({
-  _id : req.params.storyid,
-}).then((story)=>{
-  res.redirect('/feed')
-})
+    username: req.session.passport.user
+  })
+  storyModel.findByIdAndDelete({
+    _id: req.params.storyid,
+  }).then((story) => {
+    res.redirect('/feed')
+  })
 })
 
 // dltpost 
-router.get("/dltpost/:postid",isLoggedIn,  async (req, res, next)=>{
+router.get("/dltpost/:postid", isLoggedIn, async (req, res, next) => {
   const user = await userModel.findOne({
-    username : req.session.passport.user
+    username: req.session.passport.user
   })
-postModel.findByIdAndDelete({
-  _id : req.params.postid,
-}).then((post)=>{
-  res.redirect(req.header("referer"))
-})
+  postModel.findByIdAndDelete({
+    _id: req.params.postid,
+  }).then((post) => {
+    res.redirect("/feed")
+  })
 })
 
 
