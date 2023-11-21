@@ -8,6 +8,40 @@
 </head>
 <body>
     <div id="main">
+        <div id="pop2">
+            <div class="boxer">
+              <a href="/dltpost/<%=userpost._id%>">
+                <div class="cpp">
+                    <h3>Delete Post</h3>
+                  </div>
+              </a>
+              <div style="cursor: pointer;" class="up rmp">
+                <h5>Edit</h5>
+              </div>
+              <div style="cursor: pointer;" class="rmp">
+                <h5>Hide like count</h5>
+              </div>
+              <div style="cursor: pointer;" class="rmp">
+                <h5>Turn off commenting</h5>
+              </div>
+              <div style="cursor: pointer;" class="rmp">
+                <h5>Go to post</h5>
+              </div>
+              <div style="cursor: pointer;" class="rmp">
+                <h5>Share to</h5>
+              </div>
+              <div style="cursor: pointer;" class="rmp">
+                <h5>Copy link</h5>
+              </div>
+              <div style="cursor: pointer;" class="rmp">
+                <h5>About this account</h5>
+              </div>
+              <div style="cursor: pointer;" class="rmp cancel">
+                <h5>Cancel</h5>
+              </div>
+    
+            </div>
+          </div>
         <div class="pop">
             <div id="boo" class="closebtn"><svg aria-label="Close" class="x1lliihq x1n2onr6 x9bdzbf closebtn" fill="currentColor"
                 height="18" role="img" viewBox="0 0 24 24" width="18">
@@ -39,7 +73,7 @@
                             </a>
                         </div>
                         <div class="rightside">
-                            <svg aria-label="More options" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><title>More options</title><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg>
+                            <svg id="option" aria-label="More options" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><title>More options</title><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg>
                         </div>
                     </div>
                     <div class="cmtmid">
@@ -275,6 +309,14 @@
 
         closebtn.addEventListener("click", ()=>{
             window.history.back()
+        })
+       
+        document.querySelector('#option').addEventListener("click", (e)=>{
+            document.querySelector('#pop2').style.display = 'initial'
+        })
+
+        document.querySelector('.cancel').addEventListener('click',function(e){
+            document.querySelector('#pop2').style.display = 'none'
         })
     </script>
 </body>

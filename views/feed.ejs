@@ -42,7 +42,7 @@
                     <img src="../images/uploads/<%=story.author.dp%>" alt="">
                   </div>
                   <div class="text">
-                    <h6>
+                    <h6 id="butonlal">
                       <%=story.author.username.slice(0,7)%>...
                     </h6>
                   </div>
@@ -144,9 +144,7 @@
               <input style="display: none;" type="file" name="story" id="profile2">
             </form>
           </div>
-          <div style="cursor: pointer;" class="rmp">
-            <h5>Delete story</h5>
-          </div>
+          
 
           <a href="" id="profil">
             <div style="cursor: pointer;" class="can">
@@ -272,7 +270,7 @@
           <span>${timeAgo(post.time) ? timeAgo(post.time) : "1 second ago"
           }</span>
         </div>
-        <div class="rt">
+        <div id="morebtnpost" class="rt">
           <svg
             aria-label="More options"
             class="x1lliihq x1n2onr6 x5n08af"
@@ -616,6 +614,13 @@
       document.querySelector('#storyform').submit();
     });
 
+
+
+
+  
+     
+
+  
   </script>
 </body>
 

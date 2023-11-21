@@ -321,3 +321,90 @@ left: 14%;
 color: #acacac;
 font-weight: 500;
 }
+/* pop2----start */
+#pop2{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.571);
+    position: absolute;
+    top: 0;
+    display: none;
+    left: 0;
+    z-index: 99999;
+ }
+ .boxer{
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+width: 30vmax;
+height: 35vmax;
+background-color: #ffffff;
+border-radius: 12px;
+ }
+ .cpp{
+    width: 100%;
+    height: 11%;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cpp h3{
+     font-weight: 400;
+     color: #ee5460;
+ }
+ .up{
+    width: 100%;
+    height: 11%;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+ .up h5{
+    font-weight: 400;
+ }
+ .rmp{
+    width: 100%;
+    height: 11%;
+    border-bottom: 1px solid #dbdbdb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+ .rmp h5{
+    font-weight: 400;
+    
+ }
+ .can{
+    width: 100%;
+    height: 21.6%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+   
+ }
+ .can h5{
+    font-weight: 400;
+ }
+
+ #follow{
+    background-color: #0095f6;
+    color: white;
+ }
+ #msg{
+    margin-left: -1vmax;
+ }
+
+#saved{
+    width: fit-content;
+    height: fit-content;
+    text-decoration: none;
+}
+#saved svg{
+    margin-left: 1vmax;
+}
+/* end-------- */

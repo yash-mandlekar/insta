@@ -35,6 +35,14 @@
             <img src="../images/uploads/<%=story.author.dp%>" alt="">
           </div>
           <h3><%=story.author.username%></h3>
+         <% if(story.author._id.toString() === user._id.toString()){%>
+          <a href="/dltstory/<%=story._id%>">
+            <div class="dltbtn">
+              <h5>Delete story</h5>
+            </div>
+          </a>
+        <% } %>
+         
         </div>
         <img src="/post/<%= story.file %>" />
       </div>

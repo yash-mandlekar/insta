@@ -4,6 +4,7 @@ var userModel = require("../models/usermodel");
 var postModel = require("../models/postmodel");
 var commentModel = require("../models/commentModel");
 var storyModel = require('../models/storyModel')
+var chat = require('../models/chatmodel');
 const passport = require("passport");
 const multer = require("multer");
 const crypto = require("crypto");
@@ -416,6 +417,33 @@ router.get("/saved/:username", isLoggedIn, async (req, res, next) => {
 
   res.render("saved", { user, posts: user.bookmarks, founduser });
 })
+
+// dlt storyyyy
+router.get("/dltstory/:storyid",isLoggedIn, async (req, res,next)=>{
+  var user = await userModel.findOne({
+  username : req.session.passport.user
+})
+ storyModel.findByIdAndDelete({
+  _id : req.params.storyid,
+}).then((story)=>{
+  res.redirect('/feed')
+})
+})
+
+// dltpost 
+router.get("/dltpost/:postid",isLoggedIn,  async (req, res, next)=>{
+  const user = await userModel.findOne({
+    username : req.session.passport.user
+  })
+postModel.findByIdAndDelete({
+  _id : req.params.postid,
+}).then((post)=>{
+  res.redirect(req.header("referer"))
+})
+})
+
+
+
 // messages----------
 router.get('/message', isLoggedIn, async (req, res, next) => {
   const user = await userModel.findOne({ username: req.session.passport.user })
