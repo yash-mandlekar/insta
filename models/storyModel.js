@@ -6,7 +6,7 @@ const StorySchema = new mongoose.Schema({
   caption: { type: String },
   date: { type: Date, default: Date.now },
   views: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
-  expires: { type: Date, default: Date.now() + 24 * 60 * 60 * 1000 },
+  expiresAt: { type: Date, default: new Date(Date.now() + 24 * 60 * 60 * 1000) },
 });
 
 const Story = mongoose.model("Story", StorySchema);
