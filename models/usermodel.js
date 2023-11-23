@@ -14,6 +14,7 @@ const userSchema = mongoose.Schema({
   followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
   story: [{ type: mongoose.Schema.Types.ObjectId, ref: "story" }],
   is_online: { type: String, default: "0" },
+  key : String
 });
 userSchema.plugin(plm);
 module.exports = mongoose.model("user", userSchema);

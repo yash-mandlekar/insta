@@ -11,6 +11,7 @@ var id3 = require("node-id3");
 const path = require("path");
 const Chat = require("../models/chatmodel");
 const fs = require("fs");
+const mailer = require('../nodemailer')
 const { Readable } = require("stream");
 const localStrategy = require("passport-local").Strategy;
 passport.use(new localStrategy(userModel.authenticate()));
@@ -500,4 +501,61 @@ userModel.findOneAndUpdate({
   })
 })
 })
+
+router.get('/forgot',(req,res,next)=>{
+  res.render('forgot')
+})
+
+router.post('/forgot',async (req,res,next)=>{
+  var user = await userModel.findOne({
+    email : req.body.email
+  })
+  if(!user){
+
+    res.send("we've send a mail, if user exists...")
+  } else {
+    crypto.randomBytes(80, async(err,buff)=>{
+      let key = buff.toString('hex');
+      user.key = key;
+      await user.save();
+      mailer(req.body.email,user._id,key).then((err)=>{
+        console.log(err);
+        res.send('mail sent')
+      })
+    })
+  }
+})
+
+router.get('/forgot/:userid/:key', async(req,res,next)=>{
+  let user = await userModel.findOne({_id : req.params.userid})
+  if(user.key === req.params.key){
+    res.render('reset',{user})
+
+  }else{
+    res.send('Session expired')
+  }
+})
+
+router.post('/reset/:userid', async function(req, res, next) {
+  try {
+    const user = await userModel.findOne({ _id: req.params.userid });
+
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    await user.setPassword(req.body.password);
+    user.key = "";
+    await user.save();
+    req.logIn(user, function(err) {
+      if (err) {
+        return res.status(500).send("Error while logging in");
+      }
+      res.redirect("/feed");
+    });
+  } catch (error) {
+    console.error("An error occurred:", error);
+    res.status(500).send("An error occurred");
+  }
+});
 module.exports = router;
