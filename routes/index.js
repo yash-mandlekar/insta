@@ -4,12 +4,12 @@ var userModel = require("../models/usermodel");
 var postModel = require("../models/postmodel");
 var commentModel = require("../models/commentModel");
 var storyModel = require('../models/storyModel')
-var chat = require('../models/chatmodel');
 const passport = require("passport");
 const multer = require("multer");
 const crypto = require("crypto");
 var id3 = require("node-id3");
 const path = require("path");
+const Chat = require("../models/chatmodel");
 const fs = require("fs");
 const { Readable } = require("stream");
 const localStrategy = require("passport-local").Strategy;
@@ -75,6 +75,7 @@ router.get("/feed", isLoggedIn, async function (req, res, next) {
   });
   const post = await postModel.find().populate("user");
   const stories = await storyModel.find().populate("author");
+  console.log(stories);
   res.render("feed", { user, post, stories });
 });
 
@@ -257,7 +258,9 @@ router.post(
         founduser.save();
       })
       .then(() => {
-        res.redirect(`/profile/${req.session.passport.user}`);
+        setTimeout(() => {
+          res.redirect(`/profile/${req.session.passport.user}`);
+        },500)
       });
   }
 );
@@ -447,6 +450,54 @@ router.get("/dltpost/:postid", isLoggedIn, async (req, res, next) => {
 // messages----------
 router.get('/message', isLoggedIn, async (req, res, next) => {
   const user = await userModel.findOne({ username: req.session.passport.user })
-  res.render('message', { user })
+  const users = await userModel.find({ _id: { $ne: req.user._id } })
+  res.render('message', { user:user, users: users })
+})
+
+
+//save-chat
+router.post("/save-chat", async function (req, res, next) {
+  var chat = new Chat({
+    sender_id: req.body.sender_id,
+    receiver_id: req.body.receiver_id,
+    message: req.body.message,
+  });
+  var newChat = await chat.save();
+  res.status(200).send({ success: true, msg: "Chat Inserted", data: newChat });
+});
+
+// settings 
+router.get("/settings",isLoggedIn ,async (req,res,next)=>{
+  const user = await userModel.findOne({ username: req.session.passport.user })
+  const users = await userModel.find({ _id: req.user._id  })
+  console.log(users);
+  res.render('settings', { user:user, users: users })
+})
+router.get('/check/:user',(req,res,next)=>{
+  userModel.findOne({
+    username : req.params.user
+  }).then(function(user){
+    if(user) {
+  res.json(true)
+    }else{
+      res.json(false)
+    }
+  })
+})
+
+router.post('/updated',isLoggedIn,(req,res,next)=>{
+userModel.findOneAndUpdate({
+  username : req.session.passport.user
+},{
+  username : req.body.username,
+  fullname : req.body.fullname
+},{new : true}).then(function(update){
+  req.logIn(update, function(err){
+    if(err) { return next(err)}
+    setTimeout(function(){
+      return res.redirect('/feed')
+    },500)
+  })
+})
 })
 module.exports = router;
