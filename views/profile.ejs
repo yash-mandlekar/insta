@@ -27,7 +27,7 @@
                            
                           
                             <% if(founduser.username === user.username){%>
-                                <a href="/settings"><button>Edit profile</button></a>
+                                <a href="/settings/<%=user.username%>"><button>Edit profile</button></a>
                                 <svg aria-label="Options" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24"
                                     role="img" viewBox="0 0 24 24" width="24">
                                     <title>Options</title>
@@ -62,7 +62,10 @@
                             <h4>
                                 <%=founduser.fullname %>
                             </h4>
-
+                            
+                        </div>
+                        <div class="end2">
+                            <p><%=founduser.bio%></p>
                         </div>
                     </div>
                 </div>
@@ -181,7 +184,7 @@
                     <button id="confirm-yes">Yes</button>
                     <button id="confirm-no">No</button>
                 </div>
-                <a href="/profile" id="boo"><svg aria-label="Close" class="x1lliihq x1n2onr6 x9bdzbf"
+                <a id="boo"><svg aria-label="Close" class="x1lliihq x1n2onr6 x9bdzbf"
                         fill="currentColor" height="18" role="img" viewBox="0 0 24 24" width="18">
                         <title>Close</title>
                         <polyline fill="none" points="20.643 3.357 12 12 3.353 20.647" stroke="currentColor"
@@ -362,6 +365,9 @@
 
         document.querySelector('#saved').addEventListener('click', function (e) {
             document.querySelector('.saved').style.borderTop='1px solid black;'
+        })
+        document.querySelector('#boo').addEventListener('click', function (e) {
+            document.querySelector('.pop').style.display='none'
         })
     </script>
 </body>

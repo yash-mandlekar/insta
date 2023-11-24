@@ -3,7 +3,7 @@
 
 <div id="moreopt">
   <div class="upr">
-    <a href="/settings">
+    <a href="/settings/<%=user.username%>">
       <button class="sentii">
         <svg aria-label="Settings" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="18" role="img"
           viewBox="0 0 24 24" width="18">
@@ -27,15 +27,17 @@
       </svg>
       <h5>Your activity</h5>
     </button>
-    <button class="sentii">
-      <svg aria-label="Saved" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="18" role="img"
-        viewBox="0 0 24 24" width="18">
-        <title>Saved</title>
-        <polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor"
-          stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon>
-      </svg>
-      <h5>Saved</h5>
-    </button>
+    <a href="/saved/<%=user.username%>">
+      <button class="sentii">
+        <svg aria-label="Saved" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="18" role="img"
+          viewBox="0 0 24 24" width="18">
+          <title>Saved</title>
+          <polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor"
+            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon>
+        </svg>
+        <h5>Saved</h5>
+      </button>
+    </a>
     <button class="sentii">
       <svg aria-label="Theme icon" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="18" role="img"
         viewBox="0 0 24 24" width="18">

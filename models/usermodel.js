@@ -5,6 +5,7 @@ const userSchema = mongoose.Schema({
   fullname: String,
   username: String,
   password: String,
+  bio : String,
   dp: { type: String, default: "def.png" },
   role: { type: String, default: "user" },
   blocked: { type: Boolean, default: false },

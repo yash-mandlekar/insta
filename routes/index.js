@@ -64,6 +64,7 @@ const upload1 = multer({ storage: storage1 });
 router.get("/", function (req, res, next) {
   res.render("index", { title: "Express" });
 });
+
 router.get("/accounts/emailsignup", function (req, res, next) {
   res.render("signup");
 });
@@ -468,8 +469,8 @@ router.post("/save-chat", async function (req, res, next) {
 });
 
 // settings 
-router.get("/settings",isLoggedIn ,async (req,res,next)=>{
-  const user = await userModel.findOne({ username: req.session.passport.user })
+router.get("/settings/:user",isLoggedIn ,async (req,res,next)=>{
+  const user = await userModel.findOne({ username: req.params.user })
   const users = await userModel.find({ _id: req.user._id  })
   console.log(users);
   res.render('settings', { user:user, users: users })
@@ -491,7 +492,8 @@ userModel.findOneAndUpdate({
   username : req.session.passport.user
 },{
   username : req.body.username,
-  fullname : req.body.fullname
+  fullname : req.body.fullname,
+  bio : req.body.bio
 },{new : true}).then(function(update){
   req.logIn(update, function(err){
     if(err) { return next(err)}
