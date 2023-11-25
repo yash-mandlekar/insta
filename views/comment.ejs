@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/comment.css">
 </head>
 
@@ -123,6 +124,7 @@
                                     <p>
                                         <%=cmt.comment %>
                                     </p>
+                    
                                 </div>
                                 <div class="end">
 
@@ -148,6 +150,10 @@
                                                 <% } %>
 
                                     </a>
+                                    <% if(founduser._id.toString() === cmt.user._id.toString()){ %>
+
+                                        <a id="harry" href="/cmtdlt/<%=cmt._id%>/<%=founduser._id%>/<%=userpost._id%>"><i class="ri-delete-bin-line"></i></a>
+                                   <% }%>
                                 </div>
                             </div>
                             <% }); %>

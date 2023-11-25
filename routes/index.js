@@ -302,6 +302,7 @@ router.get("/comment/:id", isLoggedIn, (req, res, next) => {
           },
         ])
         .then((userpost) => {
+          console.log(userpost.comments);
           if (req.header("referer").split("http://localhost:3000")[1] === "/feed") {
             res.render("comment", { founduser, userpost, route: "/feed" });
           } else if (req.header("referer").split("/").slice(-2).includes("profile")) {
@@ -380,6 +381,17 @@ router.get("/cmtLike/:cmtId/:userId", async (req, res, next) => {
       });
     });
 });
+
+router.get('/cmtdlt/:cmtId/:userIs/:postId',isLoggedIn,async (req, res) => {
+  const user = await userModel.findOne({
+    _id : req.params.userIs
+  })
+  commentModel.findByIdAndDelete({
+_id : req.params.cmtId
+  }).then((cmt)=>{
+    res.redirect(`/comment/${req.params.postId}`)
+  })
+})
 
 // ---------------explore-----
 

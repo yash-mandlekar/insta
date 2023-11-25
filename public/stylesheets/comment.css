@@ -195,14 +195,27 @@ margin-bottom: 2vmax;
 }
 .cmtside{
     width: 100%;
-    height: 2vmax;
+    height: fit-content;
     display: flex;
     align-items: center;
     position: relative;
     justify-content: space-between;
     gap: 10px;
+    /* background-color: red; */
     margin-bottom: 10px;
-    padding-left: 10px;
+    padding: 10px;
+}
+.cmtside:hover{
+    background-color: #eff6ff;
+}
+.cmtside:hover #harry{
+    display: initial;
+}
+#harry{
+    display: none;
+}
+#likecount{
+    margin-top: -10px;
 }
 .mid{
     width: fit-content;
@@ -210,14 +223,16 @@ margin-bottom: 2vmax;
     height: 100%;
     align-items:flex-start;
     gap: 10px;
-    margin-left: -15vmax;
+    margin-left: -9vmax;
 }
 .end{
-    width: 5%;
+    width: 10%;
     display: flex;
     position: relative;
     justify-content: center;
     align-items: center;
+    gap: 4px;
+    padding: 4px;
     
 }
 #lik{
