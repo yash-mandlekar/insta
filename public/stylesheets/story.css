@@ -36,6 +36,7 @@ html,body{
     width: 0%;
     height: 100%;
     background-color: #f4f3f3;
+    transition: cubic-bezier(0.19, 1, 0.22, 1) 1s;
 }
 .userprofile{
     width: 100%;
