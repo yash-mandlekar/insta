@@ -11,9 +11,9 @@
 
 <body>
   <div id="main">
-   
+
     <div id="commentOpt"></div>
-   
+
     <%- include('./partials/header') %>
       <div id="right">
         <div class="suggest">
@@ -22,7 +22,9 @@
           </div>
           <div class="two">
             <div class="circle">
-             <img src="https://plus.unsplash.com/premium_photo-1700391373098-cd9acd1b7e7c?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+              <img
+                src="https://plus.unsplash.com/premium_photo-1700391373098-cd9acd1b7e7c?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="">
             </div>
             <h5>Yash Mandlekar</h5>
             <h6>Follow</h6>
@@ -40,7 +42,12 @@
             <i id="add" class="ri-add-circle-fill"></i>
             <div class="text">
               <h6>
-                <%=user.username.slice(0,7)%>...
+                <% if(user.username.length> 5){ %>
+                  <%=user.username.slice(0,7)%>...
+                    <% }else{ %>
+                      <%=user.username.slice(0,7)%>
+                        <% } %>
+
               </h6>
             </div>
           </div>
@@ -64,7 +71,7 @@
           </div>
         </div>
         <div class="feeds"></div>
-        <div class="loadbtn">Loading...</div>
+        <div class="loadbtn"></div>
       </div>
       <div class="pop">
         <div id="confirm-box">
@@ -155,7 +162,7 @@
               <input style="display: none;" type="file" name="story" id="profile2">
             </form>
           </div>
-          
+
 
           <a href="" id="profil">
             <div style="cursor: pointer;" class="can">
@@ -212,7 +219,7 @@
     var loadbtn = document.querySelector(".loadbtn");
 
     right.addEventListener("scroll", (e) => {
-      if (e.target.scrollTop + 820 > right.scrollHeight) {
+      if (e.target.scrollTop + window.innerHeight > right.scrollHeight) {
         setTimeout(() => {
           fetchPost(count);
         }, 1000);
@@ -222,7 +229,7 @@
     const fetchPost = async (page) => {
       var limit = 5;
       const { data } = await axios.get(`/feeds/${page}/${limit}`);
-      if (data.posts.length === 0) {
+      if (data.posts.length < 5) {
         loadbtn.style.display = "none";
       }
       posts.push(...data.posts);
@@ -561,7 +568,7 @@
         "1px solid #dbdbdb";
       document.querySelector("#next").style.display = "none";
     });
-    
+
 
     document.addEventListener("DOMContentLoaded", function (event) {
       var scrollpos = localStorage.getItem("scrollpos");
@@ -628,10 +635,10 @@
 
 
 
-  
-     
 
-  
+
+
+
   </script>
 </body>
 
