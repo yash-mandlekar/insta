@@ -487,7 +487,7 @@ router.get('/check/:user',(req,res,next)=>{
   })
 })
 
-router.post('/updated',isLoggedIn,(req,res,next)=>{
+router.post('/updated/:user',isLoggedIn,(req,res,next)=>{
 userModel.findOneAndUpdate({
   username : req.session.passport.user
 },{
@@ -498,7 +498,7 @@ userModel.findOneAndUpdate({
   req.logIn(update, function(err){
     if(err) { return next(err)}
     setTimeout(function(){
-      return res.redirect('/feed')
+      return res.redirect(`/profile/${req.params.user}`)
     },500)
   })
 })

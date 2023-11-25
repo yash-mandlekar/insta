@@ -10,11 +10,14 @@
     <div id="main">
         <div id="pop2">
             <div class="boxer">
-              <a href="/dltpost/<%=userpost._id%>">
-                <div class="cpp">
-                    <h3>Delete Post</h3>
-                  </div>
-              </a>
+                <% if(founduser._id.toString() === userpost.user._id.toString()){ %>
+                    <a href="/dltpost/<%=userpost._id%>">
+                        <div class="cpp">
+                            <h3>Delete Post</h3>
+                          </div>
+                      </a>
+               <% }%>
+            
               <div style="cursor: pointer;" class="up rmp">
                 <h5>Edit</h5>
               </div>

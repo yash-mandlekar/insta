@@ -126,6 +126,7 @@
                             </svg>
                             <h5>REELS</h5>
                         </div>
+                       <% if(founduser.username === user.username){%>
                         <a id="saved" href="/saved/<%=founduser.username%>">
                             <div class="op tara">
                                 <svg aria-label="" class="x1lliihq x1n2onr6 x1roi4f4" fill="currentColor" height="12"
@@ -137,6 +138,7 @@
                                 <h5>SAVED</h5>
                             </div>
                         </a>
+                       <%}%>
                         <div class="op tara">
                             <svg aria-label="" class="x1lliihq x1n2onr6 x1roi4f4" fill="currentColor" height="12"
                                 role="img" viewBox="0 0 24 24" width="12">

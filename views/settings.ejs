@@ -36,7 +36,7 @@
                </div>
                <h2><%=users[0].username%></h2>
             </div>
-            <form action="/updated" method="post" id="form">
+            <form action="/updated/<%=user.username%>" method="post" id="form">
                 <h3>Email address</h3>
                 <input type="email" disabled value="<%=users[0].email%>">
                 <h3>Username</h3>
