@@ -1,69 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/stylesheets/comment.css">
 </head>
+
 <body>
     <div id="main">
         <div id="pop2">
             <div class="boxer">
-                <% if(founduser._id.toString() === userpost.user._id.toString()){ %>
+                <% if(founduser._id.toString()===userpost.user._id.toString()){ %>
                     <a href="/dltpost/<%=userpost._id%>">
                         <div class="cpp">
                             <h3>Delete Post</h3>
-                          </div>
-                      </a>
-               <% }%>
-            
-              <div style="cursor: pointer;" class="up rmp">
-                <h5>Edit</h5>
-              </div>
-              <div style="cursor: pointer;" class="rmp">
-                <h5>Hide like count</h5>
-              </div>
-              <div style="cursor: pointer;" class="rmp">
-                <h5>Turn off commenting</h5>
-              </div>
-              <div style="cursor: pointer;" class="rmp">
-                <h5>Go to post</h5>
-              </div>
-              <div style="cursor: pointer;" class="rmp">
-                <h5>Share to</h5>
-              </div>
-              <div style="cursor: pointer;" class="rmp">
-                <h5>Copy link</h5>
-              </div>
-              <div style="cursor: pointer;" class="rmp">
-                <h5>About this account</h5>
-              </div>
-              <div style="cursor: pointer;" class="rmp cancel">
-                <h5>Cancel</h5>
-              </div>
-    
+                        </div>
+                    </a>
+                    <% }%>
+
+                        <div style="cursor: pointer;" class="up rmp">
+                            <h5>Edit</h5>
+                        </div>
+                        <div style="cursor: pointer;" class="rmp">
+                            <h5>Hide like count</h5>
+                        </div>
+                        <div style="cursor: pointer;" class="rmp">
+                            <h5>Turn off commenting</h5>
+                        </div>
+                        <div style="cursor: pointer;" class="rmp">
+                            <h5>Go to post</h5>
+                        </div>
+                        <div style="cursor: pointer;" class="rmp">
+                            <h5>Share to</h5>
+                        </div>
+                        <div style="cursor: pointer;" class="rmp">
+                            <h5>Copy link</h5>
+                        </div>
+                        <div style="cursor: pointer;" class="rmp">
+                            <h5>About this account</h5>
+                        </div>
+                        <div style="cursor: pointer;" class="rmp cancel">
+                            <h5>Cancel</h5>
+                        </div>
+
             </div>
-          </div>
+        </div>
         <div class="pop">
-            <div id="boo" class="closebtn"><svg aria-label="Close" class="x1lliihq x1n2onr6 x9bdzbf closebtn" fill="currentColor"
-                height="18" role="img" viewBox="0 0 24 24" width="18">
-                <title>Close</title>
-                <polyline fill="none" points="20.643 3.357 12 12 3.353 20.647" stroke="currentColor"
-                    stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></polyline>
-                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="3" x1="20.649" x2="3.354" y1="20.649" y2="3.354"></line>
-            </svg></div>
+            <a href="<%= route %>">
+                <div id="boo" class="closebtn"><svg aria-label="Close" class="x1lliihq x1n2onr6 x9bdzbf closebtn"
+                        fill="currentColor" height="18" role="img" viewBox="0 0 24 24" width="18">
+                        <title>Close</title>
+                        <polyline fill="none" points="20.643 3.357 12 12 3.353 20.647" stroke="currentColor"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></polyline>
+                        <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="3" x1="20.649" x2="3.354" y1="20.649" y2="3.354"></line>
+                    </svg>
+                </div>
+            </a>
+
             <div class="box">
                 <div class="leftpart">
-                    
-                    <% if(userpost.filetype.split("/")[0]=="image"){ %>
+
+                    <% if(userpost.filetype.split("/")[0]=="image" ){ %>
                         <img src="/post/<%=userpost.post%>" alt="" />
                         <%}else{%>
-                        <video id="${post._id}" class="dbllike reel" controls>
-                          <source src="/post/<%=userpost.post%>" type="video/mp4" />
-                        </video>
-                        <%}%>
+                            <video id="${post._id}" class="dbllike reel" controls>
+                                <source src="/post/<%=userpost.post%>" type="video/mp4" />
+                            </video>
+                            <%}%>
                 </div>
                 <div class="rightpart">
                     <div class="cmttop">
@@ -72,11 +78,19 @@
                                 <img src="../images/uploads/<%=userpost.user.dp %>" alt="">
                             </div>
                             <a href="/profile/<%=userpost.user.username%>">
-                                <h4><%=userpost.user.username %></h4>
+                                <h4>
+                                    <%=userpost.user.username %>
+                                </h4>
                             </a>
                         </div>
                         <div class="rightside">
-                            <svg id="option" aria-label="More options" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24"><title>More options</title><circle cx="12" cy="12" r="1.5"></circle><circle cx="6" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle></svg>
+                            <svg id="option" aria-label="More options" class="x1lliihq x1n2onr6 x5n08af"
+                                fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
+                                <title>More options</title>
+                                <circle cx="12" cy="12" r="1.5"></circle>
+                                <circle cx="6" cy="12" r="1.5"></circle>
+                                <circle cx="18" cy="12" r="1.5"></circle>
+                            </svg>
                         </div>
                     </div>
                     <div class="cmtmid">
@@ -84,59 +98,90 @@
                             <div class="dp">
                                 <img src="../images/uploads/<%=userpost.user.dp %>" alt="">
                             </div>
-                            <h5><%=userpost.user.username %></h5>
-                            <p><%=userpost.caption %></p>
+                            <h5>
+                                <%=userpost.user.username %>
+                            </h5>
+                            <p>
+                                <%=userpost.caption %>
+                            </p>
                         </div>
-                        
+
                     </div>
                     <div class="cmtmain">
-                        <% userpost.comments.forEach(cmt => { %>
+                        <% userpost.comments.forEach(cmt=> { %>
                             <div class="cmtside">
-                                <h6 id="likecount"><%=cmt.likes.length %> Likes</h6>
+                                <h6 id="likecount">
+                                    <%=cmt.likes.length %> Likes
+                                </h6>
                                 <div class="dp">
                                     <img src="../images/uploads/<%=cmt.user.dp %>" alt="">
                                 </div>
-                             <div class="mid">
-                                <h5><%=cmt.user.username %></h5>
-                                <p><%=cmt.comment %></p>
-                             </div>
-                             <div class="end">
-                                
-                               <a style="text-decoration: none;" href="/cmtLike/<%=cmt._id %>/<%=founduser._id %>">
-                            <% if(cmt.likes.includes(founduser._id)){ %>
-                                <svg aria-label="Unlike" id="unli" class="x1lliihq x1n2onr6 xxk16z8" fill="currentColor" height="12" role="img" viewBox="0 0 48 48" width="12"><title>Unlike</title><path d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path></svg>
-                           <% }else{ %>
-                                <svg id="lik" aria-label="Like" class="x1lliihq x1n2onr6 xyb1xck" fill="currentColor" height="12" role="img" viewBox="0 0 24 24" width="12"><title>Like</title><path d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z"></path></svg>
-                            <% } %>
-                            
-                            </a>
-                             </div>
+                                <div class="mid">
+                                    <h5>
+                                        <%=cmt.user.username %>
+                                    </h5>
+                                    <p>
+                                        <%=cmt.comment %>
+                                    </p>
+                                </div>
+                                <div class="end">
+
+                                    <a style="text-decoration: none;" href="/cmtLike/<%=cmt._id %>/<%=founduser._id %>">
+                                        <% if(cmt.likes.includes(founduser._id)){ %>
+                                            <svg aria-label="Unlike" id="unli" class="x1lliihq x1n2onr6 xxk16z8"
+                                                fill="currentColor" height="12" role="img" viewBox="0 0 48 48"
+                                                width="12">
+                                                <title>Unlike</title>
+                                                <path
+                                                    d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z">
+                                                </path>
+                                            </svg>
+                                            <% }else{ %>
+                                                <svg id="lik" aria-label="Like" class="x1lliihq x1n2onr6 xyb1xck"
+                                                    fill="currentColor" height="12" role="img" viewBox="0 0 24 24"
+                                                    width="12">
+                                                    <title>Like</title>
+                                                    <path
+                                                        d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z">
+                                                    </path>
+                                                </svg>
+                                                <% } %>
+
+                                    </a>
+                                </div>
                             </div>
-                       <% }); %>
+                            <% }); %>
                     </div>
                     <div class="ptop">
                         <div class="lf">
-                          <a style="text-decoration: none; color: black; margin-top: 4px;" id="like" href="/likes/<%=userpost.post._id %>">
-                            <% if(userpost.likes.includes(userpost.user._id)){%>
-                                <svg id="lick" aria-label="Unlike" class="x1lliihq x1n2onr6 xxk16z8" fill="currentColor" height="24" role="img" viewBox="0 0 48 48" width="24"><title>Unlike</title><path d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path></svg>
-                           <% } else{ %>
-                            <svg aria-label="Like" class="x1lliihq x1n2onr6 xyb1xck" fill="currentColor" height="24"
-                            role="img" viewBox="0 0 24 24" width="24">
-                            <title>Like</title>
-                            <path
-                                d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z">
-                            </path>
-                        </svg>
-                          <% } %>
-                            
-                          </a>
-                            <a  style="color: black;">
-                                <svg aria-label="Comment" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24"
-                                role="img" viewBox="0 0 24 24" width="24">
-                                <title>Comment</title>
-                                <path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none"
-                                    stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
-                            </svg>
+                            <a style="text-decoration: none; color: black; margin-top: 4px;" id="like"
+                                href="/likes/<%=userpost.post._id %>">
+                                <% if(userpost.likes.includes(userpost.user._id)){%>
+                                    <svg id="lick" aria-label="Unlike" class="x1lliihq x1n2onr6 xxk16z8"
+                                        fill="currentColor" height="24" role="img" viewBox="0 0 48 48" width="24">
+                                        <title>Unlike</title>
+                                        <path
+                                            d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z">
+                                        </path>
+                                    </svg>
+                                    <% } else{ %>
+                                        <svg aria-label="Like" class="x1lliihq x1n2onr6 xyb1xck" fill="currentColor"
+                                            height="24" role="img" viewBox="0 0 24 24" width="24">
+                                            <title>Like</title>
+                                            <path
+                                                d="M16.792 3.904A4.989 4.989 0 0 1 21.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 0 1 4.708-5.218 4.21 4.21 0 0 1 3.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 0 1 3.679-1.938m0-2a6.04 6.04 0 0 0-4.797 2.127 6.052 6.052 0 0 0-4.787-2.127A6.985 6.985 0 0 0 .5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 0 0 3.518 3.018 2 2 0 0 0 2.174 0 45.263 45.263 0 0 0 3.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 0 0-6.708-7.218Z">
+                                            </path>
+                                        </svg>
+                                        <% } %>
+
+                            </a>
+                            <a style="color: black;">
+                                <svg aria-label="Comment" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor"
+                                    height="24" role="img" viewBox="0 0 24 24" width="24">
+                                    <title>Comment</title>
+                                    <path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" fill="none"
+                                        stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+                                </svg>
                             </a>
                             <svg aria-label="Share Post" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor"
                                 height="24" role="img" viewBox="0 0 24 24" width="24">
@@ -157,11 +202,13 @@
                         </div>
                     </div>
                     <div class="pthre">
-                        <h5>Liked by<span> <%=userpost.likes.length %></span></h5>
+                        <h5>Liked by<span>
+                                <%=userpost.likes.length %>
+                            </span></h5>
                     </div>
                     <div class="realcmt">
                         <form action="/comment/<%=userpost._id %>" method="post">
-                            <input id="inp" name="comment" type="text" placeholder="Add a comment...">
+                            <input required id="inp" name="comment" type="text" placeholder="Add a comment...">
                             <button type="submit" class="btn">Post</button>
                         </form>
                     </div>
@@ -303,24 +350,23 @@
                 <h3 id="mh">More</h3>
             </button>
 
-            
+
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js" integrity="sha512-m9S8W3a9hhBHPFAbEIaG7J9P92dzcAWwM42VvJp5n1/M599ldK6Z2st2SfJGsX0QR4LfCVr681vyU5vW8d218w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"
+        integrity="sha512-m9S8W3a9hhBHPFAbEIaG7J9P92dzcAWwM42VvJp5n1/M599ldK6Z2st2SfJGsX0QR4LfCVr681vyU5vW8d218w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         var closebtn = document.querySelector(".closebtn");
 
-        closebtn.addEventListener("click", ()=>{
-            window.history.back()
-        })
-       
-        document.querySelector('#option').addEventListener("click", (e)=>{
+        document.querySelector('#option').addEventListener("click", (e) => {
             document.querySelector('#pop2').style.display = 'initial'
         })
 
-        document.querySelector('.cancel').addEventListener('click',function(e){
+        document.querySelector('.cancel').addEventListener('click', function (e) {
             document.querySelector('#pop2').style.display = 'none'
         })
     </script>
 </body>
+
 </html>
