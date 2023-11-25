@@ -77,7 +77,6 @@ router.get("/feed", isLoggedIn, async function (req, res, next) {
   });
   const post = await postModel.find().populate("user");
   const stories = await storyModel.find().populate("author");
-  console.log(stories);
   res.render("feed", { user, post, stories });
 });
 
@@ -238,7 +237,6 @@ router.get("/story/:id", isLoggedIn, async (req, res, next) => {
     .findOne({
       _id: req.params.id,
     }).populate('author')
-  console.log(story);
   res.render("story", { user, story });
 });
 
@@ -262,7 +260,7 @@ router.post(
       .then(() => {
         setTimeout(() => {
           res.redirect(`/profile/${req.session.passport.user}`);
-        },500)
+        }, 500)
       });
   }
 );
@@ -304,7 +302,13 @@ router.get("/comment/:id", isLoggedIn, (req, res, next) => {
           },
         ])
         .then((userpost) => {
-          res.render("comment", { founduser, userpost });
+          if (req.header("referer").split("http://localhost:3000")[1] === "/feed") {
+            res.render("comment", { founduser, userpost, route: "/feed" });
+          } else if (req.header("referer").split("/").slice(-2).includes("profile")) {
+            res.render("comment", { founduser, userpost, route: req.header("referer").split("http://localhost:3000")[1] });
+          } else {
+            res.render("comment", { founduser, userpost, route: "/feed" });
+          }
         });
     });
 });
@@ -349,7 +353,7 @@ router.post("/comment/:id", (req, res, next) => {
             .then((cmntcreated) => {
               foundpost.comments.push(cmntcreated._id);
               foundpost.save().then(() => {
-                res.redirect(`/comment/${req.params.id}`);
+                res.redirect(`back`);
               });
             });
         });
@@ -453,7 +457,7 @@ router.get("/dltpost/:postid", isLoggedIn, async (req, res, next) => {
 router.get('/message', isLoggedIn, async (req, res, next) => {
   const user = await userModel.findOne({ username: req.session.passport.user })
   const users = await userModel.find({ _id: { $ne: req.user._id } })
-  res.render('message', { user:user, users: users })
+  res.render('message', { user: user, users: users })
 })
 
 
@@ -469,58 +473,57 @@ router.post("/save-chat", async function (req, res, next) {
 });
 
 // settings 
-router.get("/settings/:user",isLoggedIn ,async (req,res,next)=>{
+router.get("/settings/:user", isLoggedIn, async (req, res, next) => {
   const user = await userModel.findOne({ username: req.params.user })
-  const users = await userModel.find({ _id: req.user._id  })
-  console.log(users);
-  res.render('settings', { user:user, users: users })
+  const users = await userModel.find({ _id: req.user._id })
+  res.render('settings', { user: user, users: users })
 })
-router.get('/check/:user',(req,res,next)=>{
+router.get('/check/:user', (req, res, next) => {
   userModel.findOne({
-    username : req.params.user
-  }).then(function(user){
-    if(user) {
-  res.json(true)
-    }else{
+    username: req.params.user
+  }).then(function (user) {
+    if (user) {
+      res.json(true)
+    } else {
       res.json(false)
     }
   })
 })
 
-router.post('/updated/:user',isLoggedIn,(req,res,next)=>{
-userModel.findOneAndUpdate({
-  username : req.session.passport.user
-},{
-  username : req.body.username,
-  fullname : req.body.fullname,
-  bio : req.body.bio
-},{new : true}).then(function(update){
-  req.logIn(update, function(err){
-    if(err) { return next(err)}
-    setTimeout(function(){
-      return res.redirect(`/profile/${req.params.user}`)
-    },500)
+router.post('/updated/:user', isLoggedIn, (req, res, next) => {
+  userModel.findOneAndUpdate({
+    username: req.session.passport.user
+  }, {
+    username: req.body.username,
+    fullname: req.body.fullname,
+    bio: req.body.bio
+  }, { new: true }).then(function (update) {
+    req.logIn(update, function (err) {
+      if (err) { return next(err) }
+      setTimeout(function () {
+        return res.redirect(`/profile/${req.params.user}`)
+      }, 500)
+    })
   })
 })
-})
 
-router.get('/forgot',(req,res,next)=>{
+router.get('/forgot', (req, res, next) => {
   res.render('forgot')
 })
 
-router.post('/forgot',async (req,res,next)=>{
+router.post('/forgot', async (req, res, next) => {
   var user = await userModel.findOne({
-    email : req.body.email
+    email: req.body.email
   })
-  if(!user){
+  if (!user) {
 
     res.send("we've send a mail, if user exists...")
   } else {
-    crypto.randomBytes(80, async(err,buff)=>{
+    crypto.randomBytes(80, async (err, buff) => {
       let key = buff.toString('hex');
       user.key = key;
       await user.save();
-      mailer(req.body.email,user._id,key).then((err)=>{
+      mailer(req.body.email, user._id, key).then((err) => {
         console.log(err);
         res.send('mail sent')
       })
@@ -528,17 +531,17 @@ router.post('/forgot',async (req,res,next)=>{
   }
 })
 
-router.get('/forgot/:userid/:key', async(req,res,next)=>{
-  let user = await userModel.findOne({_id : req.params.userid})
-  if(user.key === req.params.key){
-    res.render('reset',{user})
+router.get('/forgot/:userid/:key', async (req, res, next) => {
+  let user = await userModel.findOne({ _id: req.params.userid })
+  if (user.key === req.params.key) {
+    res.render('reset', { user })
 
-  }else{
+  } else {
     res.send('Session expired')
   }
 })
 
-router.post('/reset/:userid', async function(req, res, next) {
+router.post('/reset/:userid', async function (req, res, next) {
   try {
     const user = await userModel.findOne({ _id: req.params.userid });
 
@@ -549,7 +552,7 @@ router.post('/reset/:userid', async function(req, res, next) {
     await user.setPassword(req.body.password);
     user.key = "";
     await user.save();
-    req.logIn(user, function(err) {
+    req.logIn(user, function (err) {
       if (err) {
         return res.status(500).send("Error while logging in");
       }
