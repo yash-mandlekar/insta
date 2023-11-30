@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/feed.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/stylesheets/feed.css" />
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-  <title>Document</title>
-</head>
+  <body>
+    <div id="main">
+      <div id="commentOpt"></div>
 
-<body>
-  <div id="main">
-
-    <div id="commentOpt"></div>
-
-    <%- include('./partials/header') %>
+      <%- include('./partials/header') %>
       <div id="right">
         <div class="suggest">
-          <div class="one">
-            Suggested for you
-          </div>
+          <div class="one">Suggested for you</div>
           <div class="two">
             <div class="circle">
               <img
                 src="https://plus.unsplash.com/premium_photo-1700391373098-cd9acd1b7e7c?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="">
+                alt=""
+              />
             </div>
             <h5>Yash Mandlekar</h5>
             <h6>Follow</h6>
@@ -43,31 +43,27 @@
             <div class="text">
               <h6>
                 <% if(user.username.length> 5){ %>
-                  <%=user.username.slice(0,7)%>...
-                    <% }else{ %>
-                      <%=user.username.slice(0,7)%>
-                        <% } %>
-
+                <%=user.username.slice(0,7)%>... <% }else{ %>
+                <%=user.username.slice(0,7)%> <% } %>
               </h6>
             </div>
           </div>
           <div class="storycontent">
             <% stories.reverse().forEach((story)=>{ %>
 
-              <a href="/story/<%=story._id%>" class="storycover">
-                <div class="storybox">
-                  <div class="storydp">
-                    <img src="../images/uploads/<%=story.author.dp%>" alt="">
-                  </div>
-                  <div class="text">
-                    <h6 id="butonlal">
-                      <%=story.author.username.slice(0,7)%>...
-                    </h6>
-                  </div>
+            <a href="/story/<%=story._id%>" class="storycover">
+              <div class="storybox">
+                <div class="storydp">
+                  <img src="../images/uploads/<%=story.author.dp%>" alt="" />
                 </div>
-
-              </a>
-              <% }) %>
+                <div class="text">
+                  <h6 id="butonlal">
+                    <%=story.author.username.slice(0,7)%>...
+                  </h6>
+                </div>
+              </div>
+            </a>
+            <% }) %>
           </div>
         </div>
         <div class="feeds"></div>
@@ -80,25 +76,69 @@
           <button id="confirm-no">No</button>
         </div>
         <a href="/feed" id="boo">
-          <svg aria-label="Close" class="x1lliihq x1n2onr6 x9bdzbf" fill="currentColor" height="18" role="img"
-            viewBox="0 0 24 24" width="18">
+          <svg
+            aria-label="Close"
+            class="x1lliihq x1n2onr6 x9bdzbf"
+            fill="currentColor"
+            height="18"
+            role="img"
+            viewBox="0 0 24 24"
+            width="18"
+          >
             <title>Close</title>
-            <polyline fill="none" points="20.643 3.357 12 12 3.353 20.647" stroke="currentColor" stroke-linecap="round"
-              stroke-linejoin="round" stroke-width="3"></polyline>
-            <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-              x1="20.649" x2="3.354" y1="20.649" y2="3.354"></line>
+            <polyline
+              fill="none"
+              points="20.643 3.357 12 12 3.353 20.647"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="3"
+            ></polyline>
+            <line
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="3"
+              x1="20.649"
+              x2="3.354"
+              y1="20.649"
+              y2="3.354"
+            ></line>
           </svg>
         </a>
         <div class="model">
           <div class="contain">
             <a id="too">
-              <svg aria-label="Back" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24" role="img"
-                viewBox="0 0 24 24" width="24">
+              <svg
+                aria-label="Back"
+                class="x1lliihq x1n2onr6 x5n08af"
+                fill="currentColor"
+                height="24"
+                role="img"
+                viewBox="0 0 24 24"
+                width="24"
+              >
                 <title>Back</title>
-                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  x1="2.909" x2="22.001" y1="12.004" y2="12.004"></line>
-                <polyline fill="none" points="9.276 4.726 2.001 12.004 9.276 19.274" stroke="currentColor"
-                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polyline>
+                <line
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  x1="2.909"
+                  x2="22.001"
+                  y1="12.004"
+                  y2="12.004"
+                ></line>
+                <polyline
+                  fill="none"
+                  points="9.276 4.726 2.001 12.004 9.276 19.274"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                ></polyline>
               </svg>
             </a>
             <h4>Create new post</h4>
@@ -109,24 +149,43 @@
             <div id="preview">
               <img src="" id="pre" />
               <video controls src="" id="vid"></video>
-              <form action="/postcreator" method="post" enctype="multipart/form-data">
+              <form
+                action="/postcreator"
+                method="post"
+                enctype="multipart/form-data"
+              >
                 <div class="store">
-                  <input type="file" class="file" name="file" style="display: none" />
-                  <svg id="rolo" aria-label="Icon to represent media such as images or videos"
-                    class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="77" role="img" viewBox="0 0 97.6 77.3"
-                    width="96">
+                  <input
+                    type="file"
+                    class="file"
+                    name="file"
+                    style="display: none"
+                  />
+                  <svg
+                    id="rolo"
+                    aria-label="Icon to represent media such as images or videos"
+                    class="x1lliihq x1n2onr6 x5n08af"
+                    fill="currentColor"
+                    height="77"
+                    role="img"
+                    viewBox="0 0 97.6 77.3"
+                    width="96"
+                  >
                     <title>
                       Icon to represent media such as images or videos
                     </title>
                     <path
                       d="M16.3 24h.3c2.8-.2 4.9-2.6 4.8-5.4-.2-2.8-2.6-4.9-5.4-4.8s-4.9 2.6-4.8 5.4c.1 2.7 2.4 4.8 5.1 4.8zm-2.4-7.2c.5-.6 1.3-1 2.1-1h.2c1.7 0 3.1 1.4 3.1 3.1 0 1.7-1.4 3.1-3.1 3.1-1.7 0-3.1-1.4-3.1-3.1 0-.8.3-1.5.8-2.1z"
-                      fill="currentColor"></path>
+                      fill="currentColor"
+                    ></path>
                     <path
                       d="M84.7 18.4 58 16.9l-.2-3c-.3-5.7-5.2-10.1-11-9.8L12.9 6c-5.7.3-10.1 5.3-9.8 11L5 51v.8c.7 5.2 5.1 9.1 10.3 9.1h.6l21.7-1.2v.6c-.3 5.7 4 10.7 9.8 11l34 2h.6c5.5 0 10.1-4.3 10.4-9.8l2-34c.4-5.8-4-10.7-9.7-11.1zM7.2 10.8C8.7 9.1 10.8 8.1 13 8l34-1.9c4.6-.3 8.6 3.3 8.9 7.9l.2 2.8-5.3-.3c-5.7-.3-10.7 4-11 9.8l-.6 9.5-9.5 10.7c-.2.3-.6.4-1 .5-.4 0-.7-.1-1-.4l-7.8-7c-1.4-1.3-3.5-1.1-4.8.3L7 49 5.2 17c-.2-2.3.6-4.5 2-6.2zm8.7 48c-4.3.2-8.1-2.8-8.8-7.1l9.4-10.5c.2-.3.6-.4 1-.5.4 0 .7.1 1 .4l7.8 7c.7.6 1.6.9 2.5.9.9 0 1.7-.5 2.3-1.1l7.8-8.8-1.1 18.6-21.9 1.1zm76.5-29.5-2 34c-.3 4.6-4.3 8.2-8.9 7.9l-34-2c-4.6-.3-8.2-4.3-7.9-8.9l2-34c.3-4.4 3.9-7.9 8.4-7.9h.5l34 2c4.7.3 8.2 4.3 7.9 8.9z"
-                      fill="currentColor"></path>
+                      fill="currentColor"
+                    ></path>
                     <path
                       d="M78.2 41.6 61.3 30.5c-2.1-1.4-4.9-.8-6.2 1.3-.4.7-.7 1.4-.7 2.2l-1.2 20.1c-.1 2.5 1.7 4.6 4.2 4.8h.3c.7 0 1.4-.2 2-.5l18-9c2.2-1.1 3.1-3.8 2-6-.4-.7-.9-1.3-1.5-1.8zm-1.4 6-18 9c-.4.2-.8.3-1.3.3-.4 0-.9-.2-1.2-.4-.7-.5-1.2-1.3-1.1-2.2l1.2-20.1c.1-.9.6-1.7 1.4-2.1.8-.4 1.7-.3 2.5.1L77 43.3c1.2.8 1.5 2.3.7 3.4-.2.4-.5.7-.9.9z"
-                      fill="currentColor"></path>
+                      fill="currentColor"
+                    ></path>
                   </svg>
                   <p id="adp">Drag photos and videos here</p>
                   <div class="golgol"><a>Select from computer</a></div>
@@ -136,11 +195,14 @@
                     <div class="captiondp">
                       <img src="../images/uploads/<%= user.dp %>" alt="" />
                     </div>
-                    <h5>
-                      <%= user.username %>
-                    </h5>
+                    <h5><%= user.username %></h5>
                   </div>
-                  <input type="text" id="caption" name="caption" placeholder="Write a caption" />
+                  <input
+                    type="text"
+                    id="caption"
+                    name="caption"
+                    placeholder="Write a caption"
+                  />
                   <button style="cursor: pointer" id="share" type="submit">
                     Share
                   </button>
@@ -155,33 +217,61 @@
           <div class="cpp">
             <h3>Add to story</h3>
           </div>
-          <div style="cursor: pointer;" class="up">
+          <div style="cursor: pointer" class="up">
             <h5>Add photo</h5>
-            <form id="storyform" action="/story" method="post" enctype="multipart/form-data">
-
-              <input style="display: none;" type="file" name="story" id="profile2">
+            <form
+              id="storyform"
+              action="/story"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              <input
+                style="display: none"
+                type="file"
+                name="story"
+                id="profile2"
+              />
             </form>
           </div>
 
-
           <a href="" id="profil">
-            <div style="cursor: pointer;" class="can">
+            <div style="cursor: pointer" class="can">
               <h5>Cancel</h5>
             </div>
           </a>
-
         </div>
       </div>
       <div class="pop dope">
-
         <a href="/feed" id="boo">
-          <svg aria-label="Close" class="x1lliihq x1n2onr6 x9bdzbf" fill="currentColor" height="18" role="img"
-            viewBox="0 0 24 24" width="18">
+          <svg
+            aria-label="Close"
+            class="x1lliihq x1n2onr6 x9bdzbf"
+            fill="currentColor"
+            height="18"
+            role="img"
+            viewBox="0 0 24 24"
+            width="18"
+          >
             <title>Close</title>
-            <polyline fill="none" points="20.643 3.357 12 12 3.353 20.647" stroke="currentColor" stroke-linecap="round"
-              stroke-linejoin="round" stroke-width="3"></polyline>
-            <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-              x1="20.649" x2="3.354" y1="20.649" y2="3.354"></line>
+            <polyline
+              fill="none"
+              points="20.643 3.357 12 12 3.353 20.647"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="3"
+            ></polyline>
+            <line
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="3"
+              x1="20.649"
+              x2="3.354"
+              y1="20.649"
+              y2="3.354"
+            ></line>
           </svg>
         </a>
         <div class="model">
@@ -195,87 +285,96 @@
             <div id="preview">
               <img src="" id="pre2" />
               <video controls src="" id="vid2"></video>
-
-
-
-
             </div>
           </div>
         </div>
       </div>
-  </div>
+    </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"
-    integrity="sha512-m9S8W3a9hhBHPFAbEIaG7J9P92dzcAWwM42VvJp5n1/M599ldK6Z2st2SfJGsX0QR4LfCVr681vyU5vW8d218w=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <!-- <script src="../javascript/feed.js"></script> -->
-  <script>
-    var count = 0;
-    var posts = [];
-    var user = null;
-    var temp = "";
-    var feeds = document.querySelector(".feeds");
-    var right = document.querySelector("#right");
-    var loadbtn = document.querySelector(".loadbtn");
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.1/axios.min.js"
+      integrity="sha512-m9S8W3a9hhBHPFAbEIaG7J9P92dzcAWwM42VvJp5n1/M599ldK6Z2st2SfJGsX0QR4LfCVr681vyU5vW8d218w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- <script src="../javascript/feed.js"></script> -->
+    <script>
+      var count = 0;
+      var posts = [];
+      var user = null;
+      var temp = "";
+      var feeds = document.querySelector(".feeds");
+      var right = document.querySelector("#right");
+      var loadbtn = document.querySelector(".loadbtn");
+      var flag = true;
+      right.addEventListener("scroll", (e) => {
+        if (e.target.scrollTop + window.innerHeight > right.scrollHeight) {
+          if (flag) {
+            setTimeout(() => {
+              fetchPost(count);
+            }, 500);
+            flag = false;
+          }
+          setTimeout(() => {
+            flag = true;
+          }, 1000);
+        }
+      });
 
-    right.addEventListener("scroll", (e) => {
-      if (e.target.scrollTop + window.innerHeight > right.scrollHeight) {
-        setTimeout(() => {
-          fetchPost(count);
-        }, 1000);
-      }
-    });
-
-    const fetchPost = async (page) => {
-      var limit = 5;
-      const { data } = await axios.get(`/feeds/${page}/${limit}`);
-      if (data.posts.length < 5) {
-        loadbtn.style.display = "none";
-      }
-      posts.push(...data.posts);
-      user = data.user;
-      feeds.innerHTML = handleloop(data);
-      count += 1;
-    };
-
-    feeds.addEventListener("click", (e) => {
-      if (e.target.classList.contains("like")) {
-        handleLike(e.target.id);
-      } else if (e.target.classList.contains("bookmark")) {
-        handleBookmark(e.target.id);
-      }
-    });
-
-    feeds.addEventListener("dblclick", (e) => {
-      if (e.target.classList.contains("dbllike")) {
-        handleLike(e.target.id);
-      }
-    });
-
-    function timeAgo(input) {
-      const date = input instanceof Date ? input : new Date(input);
-      const formatter = new Intl.RelativeTimeFormat("en");
-      const ranges = {
-        years: 3600 * 24 * 365,
-        months: 3600 * 24 * 30,
-        weeks: 3600 * 24 * 7,
-        days: 3600 * 24,
-        hours: 3600,
-        minutes: 60,
-        seconds: 1,
+      const fetchPost = async (page) => {
+        var limit = 5;
+        const { data } = await axios.get(`/feeds/${page}/${limit}`);
+        if (data.posts.length < 5) {
+          loadbtn.style.display = "none";
+        }
+        posts.push(...data.posts);
+        user = data.user;
+        // console.log(data.posts);
+        feeds.appendChild(
+          document.createRange().createContextualFragment(handleloop(data))
+        );
+        count += 1;
       };
-      const secondsElapsed = (date.getTime() - Date.now()) / 1000;
-      for (let key in ranges) {
-        if (ranges[key] < Math.abs(secondsElapsed)) {
-          const delta = secondsElapsed / ranges[key];
-          return formatter.format(Math.round(delta), key);
+
+      feeds.addEventListener("click", (e) => {
+        if (e.target.classList.contains("like")) {
+          handleLike(e.target.id);
+        } else if (e.target.classList.contains("bookmark")) {
+          handleBookmark(e.target.id);
+        }
+      });
+
+      feeds.addEventListener("dblclick", (e) => {
+        if (e.target.classList.contains("dbllike")) {
+          handleLike(e.target.id);
+        }
+      });
+
+      function timeAgo(input) {
+        const date = input instanceof Date ? input : new Date(input);
+        const formatter = new Intl.RelativeTimeFormat("en");
+        const ranges = {
+          years: 3600 * 24 * 365,
+          months: 3600 * 24 * 30,
+          weeks: 3600 * 24 * 7,
+          days: 3600 * 24,
+          hours: 3600,
+          minutes: 60,
+          seconds: 1,
+        };
+        const secondsElapsed = (date.getTime() - Date.now()) / 1000;
+        for (let key in ranges) {
+          if (ranges[key] < Math.abs(secondsElapsed)) {
+            const delta = secondsElapsed / ranges[key];
+            return formatter.format(Math.round(delta), key);
+          }
         }
       }
-    }
 
-    const handleloop = (data) => {
-      data.posts.forEach((post) => {
-        temp += `
+      const handleloop = (data) => {
+        temp = "";
+        data.posts.forEach((post) => {
+          temp += `
     <div class="postcontent">
       <div class="ptop">
         <div class="lf">
@@ -285,7 +384,8 @@
           <a style="color: black" href="/profile/${post.user.username}">
             ${post.user.username}
           </a>
-          <span>${timeAgo(post.time) ? timeAgo(post.time) : "1 second ago"
+          <span>${
+            timeAgo(post.time) ? timeAgo(post.time) : "1 second ago"
           }</span>
         </div>
         <div id="morebtnpost" class="rt">
@@ -321,18 +421,20 @@
             d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"
           ></path>
         </svg>
-        ${post.filetype.split("/")[0] == "image"
+        ${
+          post.filetype.split("/")[0] == "image"
             ? `<img id="${post._id}" class="dbllike" src="/post/${post.post}" alt="" />`
             : `<video id="${post._id}" class="dbllike reel" controls>
           <source src="/post/${post.post}" type="video/mp4">
         </video>`
-          }
+        }
 
       </div>
       <div class="ptop">
         <div class="lf">
-          ${post.likes.includes(data.user._id)
-            ? `<svg
+          ${
+            post.likes.includes(data.user._id)
+              ? `<svg
             id="${post._id}"
             aria-label="Unlike"
             class="like lick x1lliihq x1n2onr6 xxk16z8"
@@ -348,7 +450,7 @@
               d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"
             ></path></svg
           >`
-            : `<svg
+              : `<svg
             id="${post._id}"
             aria-label="Like"
             class="like likebtn x1lliihq x1n2onr6 xyb1xck"
@@ -388,8 +490,9 @@
           </a>
           <a
             style="color: black"
-            href="http://web.whatsapp.com/send?text=http://localhost:3000/singlepost/${post._id
-          }"
+            href="http://web.whatsapp.com/send?text=http://localhost:3000/singlepost/${
+              post._id
+            }"
           >
             <svg
               aria-label="Share Post"
@@ -433,8 +536,9 @@
             width="24"
           >
             <polygon
-              fill="${data.user.bookmarks.includes(post._id) ? "black" : "none"
-          }"
+              fill="${
+                data.user.bookmarks.includes(post._id) ? "black" : "none"
+              }"
               id="${post._id}"
               class="bookmark"
               points="20 21 12 13.44 4 21 4 3 20 3 20 21"
@@ -457,144 +561,60 @@
         <h5>view all ${post.comments.length} comments</h5>
       </div>
     </div>`;
-      });
-      return temp;
-    };
+        });
+        return temp;
+      };
 
-    fetchPost(count);
+      fetchPost(count);
 
-    const handleLike = async (e) => {
-      await axios.get(`/like/${e}`);
-      posts.forEach((post) => {
-        if (post._id == e) {
-          if (post.likes.includes(user._id)) {
-            post.likes = post.likes.filter((id) => id != user._id);
-          } else {
-            post.likes.push(user._id);
+      const handleLike = async (e) => {
+        await axios.get(`/like/${e}`);
+        posts.forEach((post) => {
+          if (post._id == e) {
+            if (post.likes.includes(user._id)) {
+              post.likes = post.likes.filter((id) => id != user._id);
+            } else {
+              post.likes.push(user._id);
+            }
           }
-        }
-      });
-      temp = "";
-      feeds.innerHTML = handleloop({ posts, user });
-      // window.location.reload();
-    };
+        });
+        temp = "";
+        console.log(posts);
+        feeds.innerHTML = handleloop({ posts, user });
+        // window.location.reload();
+      };
 
-    const handleBookmark = async (e) => {
-      await axios.get(`/bookmark/${e}`);
-      posts.forEach((post) => {
-        if (post._id == e) {
-          if (user.bookmarks.includes(post._id)) {
-            user.bookmarks = user.bookmarks.filter((id) => id != post._id);
-          } else {
-            user.bookmarks.push(post._id);
+      const handleBookmark = async (e) => {
+        await axios.get(`/bookmark/${e}`);
+        posts.forEach((post) => {
+          if (post._id == e) {
+            if (user.bookmarks.includes(post._id)) {
+              user.bookmarks = user.bookmarks.filter((id) => id != post._id);
+            } else {
+              user.bookmarks.push(post._id);
+            }
           }
-        }
+        });
+        temp = "";
+        feeds.innerHTML = handleloop({ posts, user });
+        // window.location.reload();
+      };
+
+      document.querySelector(".golgol").addEventListener("click", function () {
+        document.querySelector(".file").click();
       });
-      temp = "";
-      feeds.innerHTML = handleloop({ posts, user });
-      // window.location.reload();
-    };
 
-    document.querySelector(".golgol").addEventListener("click", function () {
-      document.querySelector(".file").click();
-    });
+      var file = document.querySelector(".file");
+      var video = document.getElementById("vid");
 
-    var file = document.querySelector(".file");
-    var video = document.getElementById("vid");
+      var image = document.getElementById("pre");
+      file.addEventListener("change", async function (e) {
+        // document.querySelector("#picturepost").submit()
 
-    var image = document.getElementById("pre");
-    file.addEventListener("change", async function (e) {
-      // document.querySelector("#picturepost").submit()
-
-      if (e.target.files[0].type === "video/mp4") {
-        console.log("iff part");
-        document.querySelector("#pre").style.display = "none";
-        video.style.display = "initial";
-        document.querySelector(".golgol").style.display = "none";
-        document.querySelector("#adp").style.display = "none";
-        document.querySelector(".store").style.display = "none";
-        document.querySelector("#rolo").style.display = "none";
-        document.querySelector("#next").style.display = "initial";
-        document.querySelector("#too").style.display = "initial";
-      } else {
-        console.log("else part");
-        document.querySelector(".golgol").style.display = "none";
-        document.querySelector("#adp").style.display = "none";
-        document.querySelector(".store").style.display = "none";
-        document.querySelector("#rolo").style.display = "none";
-        document.querySelector("#pre").style.display = "initial";
-        document.querySelector("#next").style.display = "initial";
-        document.querySelector("#too").style.display = "initial";
-      }
-
-      var input = e.target;
-      console.log(input.files[0]);
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          if (input.files[0].type === "video/mp4") {
-            video.src = e.target.result;
-          } else {
-            image.src = e.target.result;
-          }
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
-    });
-
-    const showConfirmButton = document.getElementById("too");
-    const confirmBox = document.getElementById("confirm-box");
-    const confirmYesButton = document.getElementById("confirm-yes");
-    const confirmNoButton = document.getElementById("confirm-no");
-
-    showConfirmButton.addEventListener("click", () => {
-      confirmBox.style.display = "initial";
-    });
-
-    confirmYesButton.addEventListener("click", (e) => {
-      confirmBox.style.display = "none";
-    });
-
-    confirmNoButton.addEventListener("click", () => {
-      confirmBox.style.display = "none";
-    });
-
-    document.querySelector("#next").addEventListener("click", function (e) {
-      document.querySelector(".model").style.width = "55vmax";
-
-      document.querySelector(".caption").style.display = "initial";
-      document.querySelector("#preview").style.width = "37vmax";
-      document.querySelector("#preview").style.borderRight =
-        "1px solid #dbdbdb";
-      document.querySelector("#next").style.display = "none";
-    });
-
-
-    document.addEventListener("DOMContentLoaded", function (event) {
-      var scrollpos = localStorage.getItem("scrollpos");
-      if (scrollpos) window.scrollTo(0, scrollpos);
-    });
-
-    window.onbeforeunload = function (e) {
-      localStorage.setItem("scrollpos", window.scrollY);
-    };
-
-
-    document.querySelector('#storybtn').addEventListener("click", function (e) {
-      document.querySelector('#pop2').style.display = 'initial'
-      document.querySelector('.up').addEventListener('click', function (e) {
-        document.querySelector('#profile2').click();
-      })
-      document.querySelector('#profile2').addEventListener('change', function (e) {
-        console.log("get profile photo");
-        // document.querySelector('#storyform').submit();
-        document.querySelector('#pop2').style.display = 'none'
-        document.querySelector('.dope').style.display = 'initial'
-        var videoo = document.getElementById("vid2");
-        var imagee = document.getElementById("pre2");
         if (e.target.files[0].type === "video/mp4") {
+          console.log("iff part");
           document.querySelector("#pre").style.display = "none";
-          videoo.style.display = "initial";
+          video.style.display = "initial";
           document.querySelector(".golgol").style.display = "none";
           document.querySelector("#adp").style.display = "none";
           document.querySelector(".store").style.display = "none";
@@ -602,11 +622,12 @@
           document.querySelector("#next").style.display = "initial";
           document.querySelector("#too").style.display = "initial";
         } else {
+          console.log("else part");
           document.querySelector(".golgol").style.display = "none";
           document.querySelector("#adp").style.display = "none";
           document.querySelector(".store").style.display = "none";
           document.querySelector("#rolo").style.display = "none";
-          document.querySelector("#pre2").style.display = "initial";
+          document.querySelector("#pre").style.display = "initial";
           document.querySelector("#next").style.display = "initial";
           document.querySelector("#too").style.display = "initial";
         }
@@ -617,29 +638,104 @@
           var reader = new FileReader();
           reader.onload = function (e) {
             if (input.files[0].type === "video/mp4") {
-              videoo.src = e.target.result;
+              video.src = e.target.result;
             } else {
-              imagee.src = e.target.result;
+              image.src = e.target.result;
             }
           };
           reader.readAsDataURL(input.files[0]);
         }
-      })
+      });
 
+      const showConfirmButton = document.getElementById("too");
+      const confirmBox = document.getElementById("confirm-box");
+      const confirmYesButton = document.getElementById("confirm-yes");
+      const confirmNoButton = document.getElementById("confirm-no");
 
-    })
-    document.querySelector('#shishi').addEventListener("click", function (e) {
-      document.querySelector('#storyform').submit();
-    });
+      showConfirmButton.addEventListener("click", () => {
+        confirmBox.style.display = "initial";
+      });
 
+      confirmYesButton.addEventListener("click", (e) => {
+        confirmBox.style.display = "none";
+      });
 
+      confirmNoButton.addEventListener("click", () => {
+        confirmBox.style.display = "none";
+      });
 
+      document.querySelector("#next").addEventListener("click", function (e) {
+        document.querySelector(".model").style.width = "55vmax";
 
+        document.querySelector(".caption").style.display = "initial";
+        document.querySelector("#preview").style.width = "37vmax";
+        document.querySelector("#preview").style.borderRight =
+          "1px solid #dbdbdb";
+        document.querySelector("#next").style.display = "none";
+      });
 
+      document.addEventListener("DOMContentLoaded", function (event) {
+        var scrollpos = localStorage.getItem("scrollpos");
+        if (scrollpos) window.scrollTo(0, scrollpos);
+      });
 
+      window.onbeforeunload = function (e) {
+        localStorage.setItem("scrollpos", window.scrollY);
+      };
 
+      document
+        .querySelector("#storybtn")
+        .addEventListener("click", function (e) {
+          document.querySelector("#pop2").style.display = "initial";
+          document.querySelector(".up").addEventListener("click", function (e) {
+            document.querySelector("#profile2").click();
+          });
+          document
+            .querySelector("#profile2")
+            .addEventListener("change", function (e) {
+              console.log("get profile photo");
+              // document.querySelector('#storyform').submit();
+              document.querySelector("#pop2").style.display = "none";
+              document.querySelector(".dope").style.display = "initial";
+              var videoo = document.getElementById("vid2");
+              var imagee = document.getElementById("pre2");
+              if (e.target.files[0].type === "video/mp4") {
+                document.querySelector("#pre").style.display = "none";
+                videoo.style.display = "initial";
+                document.querySelector(".golgol").style.display = "none";
+                document.querySelector("#adp").style.display = "none";
+                document.querySelector(".store").style.display = "none";
+                document.querySelector("#rolo").style.display = "none";
+                document.querySelector("#next").style.display = "initial";
+                document.querySelector("#too").style.display = "initial";
+              } else {
+                document.querySelector(".golgol").style.display = "none";
+                document.querySelector("#adp").style.display = "none";
+                document.querySelector(".store").style.display = "none";
+                document.querySelector("#rolo").style.display = "none";
+                document.querySelector("#pre2").style.display = "initial";
+                document.querySelector("#next").style.display = "initial";
+                document.querySelector("#too").style.display = "initial";
+              }
 
-  </script>
-</body>
-
+              var input = e.target;
+              console.log(input.files[0]);
+              if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                  if (input.files[0].type === "video/mp4") {
+                    videoo.src = e.target.result;
+                  } else {
+                    imagee.src = e.target.result;
+                  }
+                };
+                reader.readAsDataURL(input.files[0]);
+              }
+            });
+        });
+      document.querySelector("#shishi").addEventListener("click", function (e) {
+        document.querySelector("#storyform").submit();
+      });
+    </script>
+  </body>
 </html>

@@ -3,7 +3,7 @@ var router = express.Router();
 var userModel = require("../models/usermodel");
 var postModel = require("../models/postmodel");
 var commentModel = require("../models/commentModel");
-var storyModel = require('../models/storyModel')
+var storyModel = require("../models/storyModel");
 const passport = require("passport");
 const multer = require("multer");
 const crypto = require("crypto");
@@ -11,7 +11,7 @@ var id3 = require("node-id3");
 const path = require("path");
 const Chat = require("../models/chatmodel");
 const fs = require("fs");
-const mailer = require('../nodemailer')
+const mailer = require("../nodemailer");
 const { Readable } = require("stream");
 const localStrategy = require("passport-local").Strategy;
 passport.use(new localStrategy(userModel.authenticate()));
@@ -20,10 +20,8 @@ const mongoose = require("mongoose");
 const usermodel = require("../models/usermodel");
 mongoose
   .connect("mongodb://0.0.0.0/instagram")
-  .then(() => {
-  })
-  .catch((err) => {
-  });
+  .then(() => {})
+  .catch((err) => {});
 
 var conn = mongoose.connection;
 var gfsbucket;
@@ -53,7 +51,8 @@ const storage1 = multer.diskStorage({
     const uniqueSuffix =
       Date.now() +
       "-" +
-      Math.round(Math.random() * 1e9) + path.extname(file.originalname);
+      Math.round(Math.random() * 1e9) +
+      path.extname(file.originalname);
     cb(null, file.fieldname + "-" + uniqueSuffix);
   },
 });
@@ -62,6 +61,7 @@ const upload1 = multer({ storage: storage1 });
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
+  console.log(userModel);
   res.render("index", { title: "Express" });
 });
 
@@ -97,7 +97,7 @@ router.get("/bookmark/:postid", isLoggedIn, async function (req, res, next) {
     user.bookmarks.push(req.params.postid);
   }
   user.save();
-  res.redirect("back")
+  res.redirect("back");
 });
 
 router.post("/register", function (req, res) {
@@ -118,7 +118,7 @@ router.post(
     successRedirect: "feed",
     failureRedirect: "/",
   }),
-  function (req, res, next) { }
+  function (req, res, next) {}
 );
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
@@ -178,15 +178,12 @@ router.post(
       gfsbucketvideo.openUploadStream(randomname + "video")
     );
 
-
     const post = await postModel.create({
       post: randomname + "post",
       filetype: req.file.mimetype,
       user: req.user._id,
       caption: req.body.caption,
-
     });
-
 
     user.posts.push(post._id);
     await user.save();
@@ -197,7 +194,9 @@ router.post(
 );
 
 // story----
-router.post('/story', isLoggedIn,
+router.post(
+  "/story",
+  isLoggedIn,
   upload.single("story"),
   async (req, res, next) => {
     const user = await userModel.findOne({
@@ -226,7 +225,7 @@ router.post('/story', isLoggedIn,
       res.redirect("/feed");
     }, 500);
   }
-)
+);
 // Single Story
 // commment
 router.get("/story/:id", isLoggedIn, async (req, res, next) => {
@@ -236,7 +235,8 @@ router.get("/story/:id", isLoggedIn, async (req, res, next) => {
   const story = await storyModel
     .findOne({
       _id: req.params.id,
-    }).populate('author')
+    })
+    .populate("author");
   res.render("story", { user, story });
 });
 
@@ -260,7 +260,7 @@ router.post(
       .then(() => {
         setTimeout(() => {
           res.redirect(`/profile/${req.session.passport.user}`);
-        }, 500)
+        }, 500);
       });
   }
 );
@@ -303,10 +303,18 @@ router.get("/comment/:id", isLoggedIn, (req, res, next) => {
         ])
         .then((userpost) => {
           console.log(userpost.comments);
-          if (req.header("referer").split("http://localhost:3000")[1] === "/feed") {
+          if (
+            req.header("referer").split("http://localhost:3000")[1] === "/feed"
+          ) {
             res.render("comment", { founduser, userpost, route: "/feed" });
-          } else if (req.header("referer").split("/").slice(-2).includes("profile")) {
-            res.render("comment", { founduser, userpost, route: req.header("referer").split("http://localhost:3000")[1] });
+          } else if (
+            req.header("referer").split("/").slice(-2).includes("profile")
+          ) {
+            res.render("comment", {
+              founduser,
+              userpost,
+              route: req.header("referer").split("http://localhost:3000")[1],
+            });
           } else {
             res.render("comment", { founduser, userpost, route: "/feed" });
           }
@@ -382,16 +390,18 @@ router.get("/cmtLike/:cmtId/:userId", async (req, res, next) => {
     });
 });
 
-router.get('/cmtdlt/:cmtId/:userIs/:postId',isLoggedIn,async (req, res) => {
+router.get("/cmtdlt/:cmtId/:userIs/:postId", isLoggedIn, async (req, res) => {
   const user = await userModel.findOne({
-    _id : req.params.userIs
-  })
-  commentModel.findByIdAndDelete({
-_id : req.params.cmtId
-  }).then((cmt)=>{
-    res.redirect(`/comment/${req.params.postId}`)
-  })
-})
+    _id: req.params.userIs,
+  });
+  commentModel
+    .findByIdAndDelete({
+      _id: req.params.cmtId,
+    })
+    .then((cmt) => {
+      res.redirect(`/comment/${req.params.postId}`);
+    });
+});
 
 // ---------------explore-----
 
@@ -407,11 +417,14 @@ router.get("/feeds/:page/:qantity", isLoggedIn, async (req, res, next) => {
   const page = req.params.page;
   const qantity = req.params.qantity;
 
-  var user = await usermodel.findById(req.user._id)
+  var user = await usermodel.findById(req.user._id);
   const foundposts = await postModel.find().populate("user");
   var posts = [];
-  foundposts.forEach(post => {
-    if (user.following.indexOf(post.user._id) !== -1 || user._id.toString() == post.user._id.toString()) {
+  foundposts.forEach((post) => {
+    if (
+      user.following.indexOf(post.user._id) !== -1 ||
+      user._id.toString() == post.user._id.toString()
+    ) {
       posts.push(post);
     }
   });
@@ -437,41 +450,42 @@ router.get("/saved/:username", isLoggedIn, async (req, res, next) => {
     .populate("bookmarks");
 
   res.render("saved", { user, posts: user.bookmarks, founduser });
-})
+});
 
 // dlt storyyyy
 router.get("/dltstory/:storyid", isLoggedIn, async (req, res, next) => {
   var user = await userModel.findOne({
-    username: req.session.passport.user
-  })
-  storyModel.findByIdAndDelete({
-    _id: req.params.storyid,
-  }).then((story) => {
-    res.redirect('/feed')
-  })
-})
+    username: req.session.passport.user,
+  });
+  storyModel
+    .findByIdAndDelete({
+      _id: req.params.storyid,
+    })
+    .then((story) => {
+      res.redirect("/feed");
+    });
+});
 
-// dltpost 
+// dltpost
 router.get("/dltpost/:postid", isLoggedIn, async (req, res, next) => {
   const user = await userModel.findOne({
-    username: req.session.passport.user
-  })
-  postModel.findByIdAndDelete({
-    _id: req.params.postid,
-  }).then((post) => {
-    res.redirect("/feed")
-  })
-})
-
-
+    username: req.session.passport.user,
+  });
+  postModel
+    .findByIdAndDelete({
+      _id: req.params.postid,
+    })
+    .then((post) => {
+      res.redirect("/feed");
+    });
+});
 
 // messages----------
-router.get('/message', isLoggedIn, async (req, res, next) => {
-  const user = await userModel.findOne({ username: req.session.passport.user })
-  const users = await userModel.find({ _id: { $ne: req.user._id } })
-  res.render('message', { user: user, users: users })
-})
-
+router.get("/message", isLoggedIn, async (req, res, next) => {
+  const user = await userModel.findOne({ username: req.session.passport.user });
+  const users = await userModel.find({ _id: { $ne: req.user._id } });
+  res.render("message", { user: user, users: users });
+});
 
 //save-chat
 router.post("/save-chat", async function (req, res, next) {
@@ -484,76 +498,84 @@ router.post("/save-chat", async function (req, res, next) {
   res.status(200).send({ success: true, msg: "Chat Inserted", data: newChat });
 });
 
-// settings 
+// settings
 router.get("/settings/:user", isLoggedIn, async (req, res, next) => {
-  const user = await userModel.findOne({ username: req.params.user })
-  const users = await userModel.find({ _id: req.user._id })
-  res.render('settings', { user: user, users: users })
-})
-router.get('/check/:user', (req, res, next) => {
-  userModel.findOne({
-    username: req.params.user
-  }).then(function (user) {
-    if (user) {
-      res.json(true)
-    } else {
-      res.json(false)
-    }
-  })
-})
-
-router.post('/updated/:user', isLoggedIn, (req, res, next) => {
-  userModel.findOneAndUpdate({
-    username: req.session.passport.user
-  }, {
-    username: req.body.username,
-    fullname: req.body.fullname,
-    bio: req.body.bio
-  }, { new: true }).then(function (update) {
-    req.logIn(update, function (err) {
-      if (err) { return next(err) }
-      setTimeout(function () {
-        return res.redirect(`/profile/${req.params.user}`)
-      }, 500)
+  const user = await userModel.findOne({ username: req.params.user });
+  const users = await userModel.find({ _id: req.user._id });
+  res.render("settings", { user: user, users: users });
+});
+router.get("/check/:user", (req, res, next) => {
+  userModel
+    .findOne({
+      username: req.params.user,
     })
-  })
-})
+    .then(function (user) {
+      if (user) {
+        res.json(true);
+      } else {
+        res.json(false);
+      }
+    });
+});
 
-router.get('/forgot', (req, res, next) => {
-  res.render('forgot')
-})
+router.post("/updated/:user", isLoggedIn, (req, res, next) => {
+  userModel
+    .findOneAndUpdate(
+      {
+        username: req.session.passport.user,
+      },
+      {
+        username: req.body.username,
+        fullname: req.body.fullname,
+        bio: req.body.bio,
+      },
+      { new: true }
+    )
+    .then(function (update) {
+      req.logIn(update, function (err) {
+        if (err) {
+          return next(err);
+        }
+        setTimeout(function () {
+          return res.redirect(`/profile/${req.params.user}`);
+        }, 500);
+      });
+    });
+});
 
-router.post('/forgot', async (req, res, next) => {
+router.get("/forgot", (req, res, next) => {
+  res.render("forgot");
+});
+
+router.post("/forgot", async (req, res, next) => {
   var user = await userModel.findOne({
-    email: req.body.email
-  })
+    email: req.body.email,
+  });
   if (!user) {
-
-    res.send("we've send a mail, if user exists...")
+    res.send("we've send a mail, if user exists...");
   } else {
     crypto.randomBytes(80, async (err, buff) => {
-      let key = buff.toString('hex');
+      let key = buff.toString("hex");
       user.key = key;
       await user.save();
       mailer(req.body.email, user._id, key).then((err) => {
         console.log(err);
-        res.send('mail sent')
-      })
-    })
+        res.send("mail sent");
+      });
+    });
   }
-})
+});
 
-router.get('/forgot/:userid/:key', async (req, res, next) => {
-  let user = await userModel.findOne({ _id: req.params.userid })
+router.get("/forgot/:userid/:key", async (req, res, next) => {
+  let user = await userModel.findOne({ _id: req.params.userid });
   if (user.key === req.params.key) {
-    res.render('reset', { user })
-
+    res.render("reset", { user });
   } else {
-    res.send('Session expired')
+    res.send("Session expired");
   }
-})
+});
 
-router.post('/reset/:userid', async function (req, res, next) {
+router.post("/reset/:userid", async function (req, res, next) {
   try {
     const user = await userModel.findOne({ _id: req.params.userid });
 
@@ -575,4 +597,10 @@ router.post('/reset/:userid', async function (req, res, next) {
     res.status(500).send("An error occurred");
   }
 });
+
+router.get("/random-user", async function (req, res) {
+  const users = await userModel.find()
+  // db.yourCollection.find().limit(-1).skip(yourRandomNumber).next()
+});
+
 module.exports = router;
