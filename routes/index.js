@@ -94,7 +94,6 @@ router.get("/feed", isLoggedIn, async function (req, res, next) {
     { $sample: { size: 10 } }, // Randomly select 10 users
   ])
   const post = await postModel.find().populate("user");
-  const stories = await storyModel.find().populate("author");
   res.render("feed", { user, post, random });
 });
 

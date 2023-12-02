@@ -19,7 +19,7 @@
       <div id="right">
         <div class="suggest">
           <div class="one">Suggested for you</div>
-          <% random.forEach((e)=>{%>
+          <% random.forEach((e)=>{%> 
           <div class="two">
             <div class="circle">
               <a href="/profile/<%= e.username %>">
@@ -47,23 +47,18 @@
           </div>
           <div class="storycontent">
             <% user.following.reverse().forEach((foll)=>{ %>
-
+            <%if(foll?.story.length>0){%>
             <a href="/story/<%=foll.story._id%>" class="storycover">
               <div class="storybox">
                 <div class="storydp">
-                  <img
-                    src="../images/uploads/<%=foll.story.author%>"
-                    alt=""
-                  />
+                  <img src="../images/uploads/<%=foll.dp%>" alt="" />
                 </div>
                 <div class="text">
-                  <h6 id="butonlal">
-                    <%=foll.story.author.username.slice(0,7)%>...
-                  </h6>
+                  <h6 id="butonlal"><%=foll?.username?.slice(0,7)%>...</h6>
                 </div>
               </div>
             </a>
-            <% }) %>
+            <%}%> <% }) %>
           </div>
         </div>
         <div class="feeds"></div>
