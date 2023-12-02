@@ -74,10 +74,28 @@ router.get("/accounts/emailsignup", function (req, res, next) {
 router.get("/feed", isLoggedIn, async function (req, res, next) {
   const user = await userModel.findOne({
     username: req.session.passport.user,
-  });
+  }).populate([
+    {
+      path: "following",
+      model: "user",
+      populate: {
+        path: "story",
+        model: "story",
+        populate:{
+          path: "author",
+          model: "user",
+        }
+      },
+    }
+  ])
+  const random = await userModel
+  .aggregate([
+    { $match: { _id: { $ne: user._id } } }, // Exclude the current user
+    { $sample: { size: 10 } }, // Randomly select 10 users
+  ])
   const post = await postModel.find().populate("user");
   const stories = await storyModel.find().populate("author");
-  res.render("feed", { user, post, stories });
+  res.render("feed", { user, post, random });
 });
 
 router.get("/reels", isLoggedIn, async function (req, res, next) {
@@ -596,11 +614,6 @@ router.post("/reset/:userid", async function (req, res, next) {
     console.error("An error occurred:", error);
     res.status(500).send("An error occurred");
   }
-});
-
-router.get("/random-user", async function (req, res) {
-  const users = await userModel.find()
-  // db.yourCollection.find().limit(-1).skip(yourRandomNumber).next()
 });
 
 module.exports = router;
