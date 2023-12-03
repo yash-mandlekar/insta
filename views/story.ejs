@@ -32,10 +32,12 @@
         </div>
         <div class="userprofile">
           <div class="ronaldo">
-            <div class="circ">
+            <a href="/profile/<%=story?.author?.username%>" class="circ">
               <img src="../images/uploads/<%=story?.author?.dp%>" alt="" />
-            </div>
-            <h3><%=story?.author?.username%></h3>
+            </a>
+            <a href="/profile/<%=story?.author?.username%>">
+              <h3><%=story?.author?.username%></h3>
+            </a>
             <% const currentDate=new Date(); %> <%const pastDate=new
             Date(story.date);%> <%const timeDifference=currentDate - pastDate%>
             <%const seconds=Math.floor(timeDifference / 1000);%> <%const
