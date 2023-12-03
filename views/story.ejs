@@ -63,7 +63,7 @@
             <%}%>
             <div class="viewers">
               <% story?.views?.forEach(view=>{ %>
-              <a class="profile-cnt" href="/profile/<%= view._id %>">
+              <a class="profile-cnt" href="/profile/<%= view.username %>">
                 <div class="circ">
                   <img src="../images/uploads/<%= view.dp %>" alt="" />
                 </div>

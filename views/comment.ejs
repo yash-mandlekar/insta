@@ -161,7 +161,7 @@
                     <div class="ptop">
                         <div class="lf">
                             <a style="text-decoration: none; color: black; margin-top: 4px;" id="like"
-                                href="/likes/<%=userpost.post._id %>">
+                                href="/like/<%=userpost._id %>">
                                 <% if(userpost.likes.includes(userpost.user._id)){%>
                                     <svg id="lick" aria-label="Unlike" class="x1lliihq x1n2onr6 xxk16z8"
                                         fill="currentColor" height="24" role="img" viewBox="0 0 48 48" width="24">
@@ -198,14 +198,15 @@
                                     stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon>
                             </svg>
                         </div>
-                        <div class="rt">
+                        <% if(founduser.bookmarks.includes(userpost._id)) %>
+                        <a href="/bookmark/<%= userpost._id %>" class="rt">
                             <svg aria-label="Save" class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="24"
                                 role="img" viewBox="0 0 24 24" width="24">
                                 <title>Save</title>
                                 <polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21" stroke="currentColor"
                                     stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon>
                             </svg>
-                        </div>
+                        </a>
                     </div>
                     <div class="pthre">
                         <h5>Liked by<span>
