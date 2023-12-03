@@ -311,6 +311,8 @@
       var right = document.querySelector("#right");
       var loadbtn = document.querySelector(".loadbtn");
       var flag = true;
+      localStorage.setItem("route", "/feed");
+
       right.addEventListener("scroll", (e) => {
         if (e.target.scrollTop + window.innerHeight > right.scrollHeight) {
           if (flag) {
@@ -739,6 +741,7 @@
       document.querySelector("#shishi").addEventListener("click", function (e) {
         document.querySelector("#storyform").submit();
       });
+
     </script>
   </body>
 </html>

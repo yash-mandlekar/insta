@@ -277,6 +277,7 @@
         </div>
     </div>
     <script>
+      localStorage.setItem("route",window.location.href.split("000")[1]);
         function createpost() {
             var button = document.querySelector('#create')
             button.addEventListener('click', function (e) {

@@ -24,21 +24,19 @@ a{
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    padding-top: 2vmax;
 }
 .container{
-    width: 67%;
+    width: 75%;
     height: 100%;
     overflow-y: auto;
-    
 }
 .container::-webkit-scrollbar{
     display: none;
 }
 .cnt{
-    width: 18.7vmax;
-    height: 18.7vmax;
-    background-color:peru;
+    width: 19.7vmax;
+    height: 19.7vmax;
     display: inline-block;
     margin-top: 1px;
     margin-left: 1px;
