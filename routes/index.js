@@ -72,28 +72,39 @@ router.get("/accounts/emailsignup", function (req, res, next) {
 /*authentication code  */
 
 router.get("/feed", isLoggedIn, async function (req, res, next) {
-  const user = await userModel.findOne({
-    username: req.session.passport.user,
-  }).populate([
-    {
-      path: "following",
-      model: "user",
-      populate: {
-        path: "story",
-        model: "story",
-        populate:{
-          path: "author",
-          model: "user",
-        }
+  // Get the current user and populate their following with stories
+  const user = await userModel
+    .findOne({
+      username: req.session.passport.user,
+    })
+    .populate([
+      {
+        path: "following",
+        model: "user",
+        populate: {
+          path: "story",
+          model: "story",
+          populate: {
+            path: "author",
+            model: "user",
+          },
+        },
       },
-    }
-  ])
-  const random = await userModel
-  .aggregate([
-    { $match: { _id: { $ne: user._id } } }, // Exclude the current user
+    ]);
+
+  // Get 10 random users excluding the current user and users they are following
+  const random = await userModel.aggregate([
+    {
+      $match: {
+        _id: { $nin: [user._id, ...user.following.map((f) => f._id)] }, // Exclude the current user and their following
+      },
+    },
     { $sample: { size: 10 } }, // Randomly select 10 users
-  ])
+  ]);
+
+  // Get all posts and populate the user field
   const post = await postModel.find().populate("user");
+
   res.render("feed", { user, post, random });
 });
 
@@ -249,12 +260,42 @@ router.get("/story/:id", isLoggedIn, async (req, res, next) => {
   const user = await userModel.findOne({
     username: req.session.passport.user,
   });
+  
   const story = await storyModel
     .findOne({
       _id: req.params.id,
     })
-    .populate("author");
+    .populate("author views");
+  
+  // Check if the story exists
+  if (!story) {
+    // Handle the case where the story is not found
+    return res.status(404).send("Story not found");
+  }
+  
+  // Check if the user's ID is not already in the views array
+  const isUserViewed = story.views.some(view => view._id.toString() === user._id.toString());
+  const isUserAuthor = story.author._id.toString() === user._id.toString();
+  
+  if (!isUserViewed && !isUserAuthor) {
+    story.views.push(user._id);
+    await story.save();
+  }
+  
   res.render("story", { user, story });
+});
+// dlt storyyyy
+router.get("/dltstory/:storyid", isLoggedIn, async (req, res, next) => {
+  var user = await userModel.findOne({
+    username: req.session.passport.user,
+  });
+  storyModel.findByIdAndDelete({
+    _id: req.params.storyid,
+  });
+  user.story.pull(req.params.storyid);
+  await user.save();
+
+  res.redirect("/feed");
 });
 
 // dp change code
@@ -467,20 +508,6 @@ router.get("/saved/:username", isLoggedIn, async (req, res, next) => {
     .populate("bookmarks");
 
   res.render("saved", { user, posts: user.bookmarks, founduser });
-});
-
-// dlt storyyyy
-router.get("/dltstory/:storyid", isLoggedIn, async (req, res, next) => {
-  var user = await userModel.findOne({
-    username: req.session.passport.user,
-  });
-  storyModel
-    .findByIdAndDelete({
-      _id: req.params.storyid,
-    })
-    .then((story) => {
-      res.redirect("/feed");
-    });
 });
 
 // dltpost

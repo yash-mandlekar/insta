@@ -19,7 +19,7 @@
       <div id="right">
         <div class="suggest">
           <div class="one">Suggested for you</div>
-          <% random.forEach((e)=>{%> 
+          <% random.forEach((e)=>{%>
           <div class="two">
             <div class="circle">
               <a href="/profile/<%= e.username %>">
@@ -34,21 +34,29 @@
         <div class="staary">
           <div id="storybtn" class="storybox">
             <div class="storydp">
+              <%if(user?.story.length>0){%>
+              <a href="/story/<%= user?.story[0]?._id %>">
+                <img src="../images/uploads/<%=user.dp%>" alt=""
+              /></a>
+              <%}else{%>
               <img src="../images/uploads/<%=user.dp%>" alt="" />
+              <%}%>
             </div>
             <i id="add" class="ri-add-circle-fill"></i>
             <div class="text">
               <h6>
                 <% if(user.username.length> 5){ %>
-                <%=user.username.slice(0,7)%>... <% }else{ %>
-                <%=user.username.slice(0,7)%> <% } %>
+                <%=user.username.slice(0,7)%>... 
+                <% }else{ %>
+                <%=user.username.slice(0,7)%> 
+                <% } %>
               </h6>
             </div>
           </div>
           <div class="storycontent">
             <% user.following.reverse().forEach((foll)=>{ %>
             <%if(foll?.story.length>0){%>
-            <a href="/story/<%=foll.story._id%>" class="storycover">
+            <a href="/story/<%=foll.story[0]._id%>" class="storycover">
               <div class="storybox">
                 <div class="storydp">
                   <img src="../images/uploads/<%=foll.dp%>" alt="" />
@@ -58,7 +66,8 @@
                 </div>
               </div>
             </a>
-            <%}%> <% }) %>
+            <%}%> 
+            <% }) %>
           </div>
         </div>
         <div class="feeds"></div>
@@ -678,56 +687,54 @@
         localStorage.setItem("scrollpos", window.scrollY);
       };
 
-      document
-        .querySelector("#storybtn")
-        .addEventListener("click", function (e) {
-          document.querySelector("#pop2").style.display = "initial";
-          document.querySelector(".up").addEventListener("click", function (e) {
-            document.querySelector("#profile2").click();
-          });
-          document
-            .querySelector("#profile2")
-            .addEventListener("change", function (e) {
-              console.log("get profile photo");
-              // document.querySelector('#storyform').submit();
-              document.querySelector("#pop2").style.display = "none";
-              document.querySelector(".dope").style.display = "initial";
-              var videoo = document.getElementById("vid2");
-              var imagee = document.getElementById("pre2");
-              if (e.target.files[0].type === "video/mp4") {
-                document.querySelector("#pre").style.display = "none";
-                videoo.style.display = "initial";
-                document.querySelector(".golgol").style.display = "none";
-                document.querySelector("#adp").style.display = "none";
-                document.querySelector(".store").style.display = "none";
-                document.querySelector("#rolo").style.display = "none";
-                document.querySelector("#next").style.display = "initial";
-                document.querySelector("#too").style.display = "initial";
-              } else {
-                document.querySelector(".golgol").style.display = "none";
-                document.querySelector("#adp").style.display = "none";
-                document.querySelector(".store").style.display = "none";
-                document.querySelector("#rolo").style.display = "none";
-                document.querySelector("#pre2").style.display = "initial";
-                document.querySelector("#next").style.display = "initial";
-                document.querySelector("#too").style.display = "initial";
-              }
-
-              var input = e.target;
-              console.log(input.files[0]);
-              if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                  if (input.files[0].type === "video/mp4") {
-                    videoo.src = e.target.result;
-                  } else {
-                    imagee.src = e.target.result;
-                  }
-                };
-                reader.readAsDataURL(input.files[0]);
-              }
-            });
+      document.querySelector("#add").addEventListener("click", function (e) {
+        document.querySelector("#pop2").style.display = "initial";
+        document.querySelector(".up").addEventListener("click", function (e) {
+          document.querySelector("#profile2").click();
         });
+        document
+          .querySelector("#profile2")
+          .addEventListener("change", function (e) {
+            console.log("get profile photo");
+            // document.querySelector('#storyform').submit();
+            document.querySelector("#pop2").style.display = "none";
+            document.querySelector(".dope").style.display = "initial";
+            var videoo = document.getElementById("vid2");
+            var imagee = document.getElementById("pre2");
+            if (e.target.files[0].type === "video/mp4") {
+              document.querySelector("#pre").style.display = "none";
+              videoo.style.display = "initial";
+              document.querySelector(".golgol").style.display = "none";
+              document.querySelector("#adp").style.display = "none";
+              document.querySelector(".store").style.display = "none";
+              document.querySelector("#rolo").style.display = "none";
+              document.querySelector("#next").style.display = "initial";
+              document.querySelector("#too").style.display = "initial";
+            } else {
+              document.querySelector(".golgol").style.display = "none";
+              document.querySelector("#adp").style.display = "none";
+              document.querySelector(".store").style.display = "none";
+              document.querySelector("#rolo").style.display = "none";
+              document.querySelector("#pre2").style.display = "initial";
+              document.querySelector("#next").style.display = "initial";
+              document.querySelector("#too").style.display = "initial";
+            }
+
+            var input = e.target;
+            console.log(input.files[0]);
+            if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function (e) {
+                if (input.files[0].type === "video/mp4") {
+                  videoo.src = e.target.result;
+                } else {
+                  imagee.src = e.target.result;
+                }
+              };
+              reader.readAsDataURL(input.files[0]);
+            }
+          });
+      });
       document.querySelector("#shishi").addEventListener("click", function (e) {
         document.querySelector("#storyform").submit();
       });
